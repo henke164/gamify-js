@@ -2,8 +2,10 @@ class GameObject {
     constructor(game, texture) {
         this.game = game;
         this.rotation = 0;
+        this.speed = 1;
+        this.velocity = new Vector2(0, 0);
         this.position = new Vector2(0, 0);
-
+        this.shouldDestroy = false;
         this.loadTexture(texture);
     }
 
@@ -18,7 +20,14 @@ class GameObject {
         this.texture.height = 80;
     }
 
-    update() { }
+    update() {
+        if (this.velocity.x != 0) {
+            this.position.x += this.velocity.x * this.speed;
+        }
+        if (this.velocity.y != 0) {
+            this.position.y += this.velocity.y * this.speed;
+        }
+    }
 
     faceTowards(vector2, cornerToFace) {
         var angle = Math.atan2(vector2.y - this.position.y,
