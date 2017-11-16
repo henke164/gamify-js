@@ -2,31 +2,35 @@ class ExampleGame extends Game {
     constructor(canvas) {
         super(canvas);
         this.addBow();
+        this.startDragLocation = new Vector2(0, 0);
     }
 
     update() {
-        /*
-            Read user input and update position
-        */
-        if(this.input.mouseState.leftButtonDown) {
-            this.shootArrow();
+        this.isDragging = this.startDragLocation != Vector2.zero;
+        if (this.input.mouseState.leftButtonDown && !this.isDragging) {
+            this.startDragLocation = this.input.mouseState.position;
+        }
+
+        if (!this.input.mouseState.leftButtonDown && this.isDragging) {
+            var dist = Vector2.distance(this.input.mouseState.position, this.startDragLocation);
+            this.shootArrow(this.startDragLocation, dist);
+            this.startDragLocation = Vector2.zero;
         }
 
         super.update();
-    };
+    }
 
     addBow() {
-        var bow = this.createGameObject(Bow);
-        bow.position = new Vector2(this.canvas.width / 2, this.canvas.height - 40);
+        this.bow = this.createGameObject(Bow);
+        this.bow.position = new Vector2(this.canvas.width / 2, this.canvas.height - 40);
     }
-    shootArrow() {
-        var bow = this.gameObjects[0];
-        var startPosition = new Vector2(bow.position.x, bow.position.y);
-        var targetPosition = this.input.mouseState.position;
+
+    shootArrow(targetPosition, speed) {
+        var startPosition = new Vector2(this.bow.position.x, this.bow.position.y);
         var arrow = this.createGameObject(Arrow)
         arrow.position = startPosition;
         arrow.faceTowards(targetPosition, TEXTURECORNER.TOP);
-        arrow.speed = 30;
+        arrow.speed = speed / 10 > 10 ? speed / 10 : 10;
         arrow.velocity = Vector2.direction(startPosition, targetPosition);
     }
 }
