@@ -1,0 +1,20 @@
+<html>
+<head>
+	<script src="script/gamify-js/input.js"></script>
+	<script src="script/gamify-js/utilities.js"></script>
+	<script src="script/gamify-js/game.js"></script>
+	<script src="script/gamify-js/gameObject.js"></script>
+	<script src="script/bow.js"></script>
+	<script>
+	window.onload = function() {
+		var gameField = document.getElementById("game");
+
+		var game = new Game(gameField);
+		game.addGameObject(Bow, new Vector2(gameField.width / 2, gameField.height - 40));
+	}
+	</script>
+</head>
+<body>
+	<canvas id="game" width="800" height="600"></canvas>
+</body>
+</html>
