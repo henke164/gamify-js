@@ -1,6 +1,6 @@
 class Bow extends GameObject {
     constructor(game) {
-        super(game, "images/bow.png");
+        super(game, "bow.png");
     }
 
     update() {
