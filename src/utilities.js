@@ -15,7 +15,13 @@ class Vector2 {
         direction.normalize();
         return direction;
     }
+
+    static distance(v1, v2) {
+        return Math.sqrt(Math.pow(v1.x - v2.x, 2) + Math.pow(v1.y - v2.y, 2));
+    }
 }
+
+Vector2.zero = new Vector2(0, 0);
 
 var TEXTURECORNER = {
     RIGHT: 0,
