@@ -10,14 +10,12 @@ class Game {
 
     addGameObject(type, position) {
         var obj = new type(this);
-
         if(!obj instanceof GameObject) {
             console.log('Type is not an GameObject');
             return;
         }
 
         obj.position = position;
-
         this.gameObjects.push(obj);
     }
 
