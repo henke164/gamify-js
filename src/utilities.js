@@ -3,6 +3,18 @@ class Vector2 {
         this.x = x;
         this.y = y;
     }
+
+    normalize() {
+        var length = Math.sqrt((this.x * this.x) + (this.y * this.y));
+        this.x = this.x / length;
+        this.y = this.y / length;
+    }
+
+    static direction(v1, v2) {
+        var direction = new Vector2(v2.x - v1.x, v2.y - v1.y);
+        direction.normalize();
+        return direction;
+    }
 }
 
 var TEXTURECORNER = {
