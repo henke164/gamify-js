@@ -37,6 +37,10 @@ class GameObject {
         this.rotation = cornerToFace + (360 + Math.round(degrees)) % 360;
     }
 
+    destroy() {
+        this.shouldDestroy = true;
+    }
+
     render(ctx) {
         if(this.texture == null) {
             return;

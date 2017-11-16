@@ -30,7 +30,7 @@ class ExampleGame extends Game {
         var arrow = this.createGameObject(Arrow)
         arrow.position = startPosition;
         arrow.faceTowards(targetPosition, TEXTURECORNER.TOP);
-        arrow.speed = speed / 10 > 10 ? speed / 10 : 10;
+        arrow.speed = speed / 10 > 3 ? speed / 10 : 3;
         arrow.velocity = Vector2.direction(startPosition, targetPosition);
     }
 }
