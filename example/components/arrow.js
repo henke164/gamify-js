@@ -1,6 +1,8 @@
 class Arrow extends GameObject {
     constructor() {
         super("images/arrow.png");
+        this.destroyOnImpact = true;
+        this.power = 1;
     }
 
     update() {

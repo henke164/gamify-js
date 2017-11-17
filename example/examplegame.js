@@ -19,8 +19,10 @@ class ExampleGame extends Game {
             this.enemyController.enemies);
 
         collisions.forEach(collision => {
-            collision.go1.shouldDestroy = true;
-            collision.go2.reduceHealth(collision.go2.speed);
+            var arrow = collision.go1;
+            var monster = collision.go2;
+            arrow.shouldDestroy = arrow.destroyOnImpact;
+            monster.reduceHealth(arrow.speed * arrow.power);
         });
 
     }

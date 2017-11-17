@@ -16,14 +16,16 @@ class BowController {
 
         if (mouseState.leftButtonDown && !this.isDragging) {
             this.startDragLocation = mouseState.position;
-        } else {
-            this.bow.update();
         }
 
         if (!mouseState.leftButtonDown && this.isDragging) {
             var dist = Vector2.distance(mouseState.position, this.startDragLocation);
             this.shootArrow(this.startDragLocation, dist);
             this.startDragLocation = Vector2.zero;
+        }
+
+        if (!this.isDragging) {
+            this.bow.update();
         }
 
         this.arrows.updateAll();
@@ -33,6 +35,7 @@ class BowController {
         var startPosition = new Vector2(this.bow.position.x, this.bow.position.y);
 
         var arrow = this.arrows.addGameObject(Arrow)
+        arrow.power = 2;
         arrow.position = startPosition;
         arrow.faceTowards(targetPosition, TEXTURECORNER.TOP);
         arrow.speed = speed / 10 > 3 ? speed / 10 : 3;
