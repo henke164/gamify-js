@@ -18,6 +18,10 @@ class Monster extends GameObject {
         if (this.currentHealth <= 0) {
             this.shouldDestroy = true;
         }
+
+        if (this.position.y > Game.screenSize.height) {
+            this.shouldDestroy = true;
+        }
     }
 
     render(ctx) {

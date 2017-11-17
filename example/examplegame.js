@@ -1,22 +1,21 @@
 class ExampleGame extends Game {
     constructor(canvas) {
         super(canvas);
-        this.bowController = new BowController();
-        this.enemyController = new EnemyController();
-        this.collisionController = new CollisionController();
+        this.bowActor = new BowActor();
+        this.enemyActor = new EnemyActor();
     }
 
     update() {
-        this.bowController.update();
-        this.enemyController.update();
+        this.bowActor.update();
+        this.enemyActor.update();
         this.detectCollisions();
         super.update();
     }
 
     detectCollisions() {
-        var collisions = this.collisionController.getCollisions(
-            this.bowController.arrows,
-            this.enemyController.enemies);
+        var collisions = CollisionDetector.findCollisions(
+            this.bowActor.arrows,
+            this.enemyActor.enemies);
 
         collisions.forEach(collision => {
             var arrow = collision.go1;
@@ -24,7 +23,6 @@ class ExampleGame extends Game {
             arrow.shouldDestroy = arrow.destroyOnImpact;
             monster.reduceHealth(arrow.speed * arrow.power);
         });
-
     }
 
     setBackground(src) {
@@ -36,8 +34,8 @@ class ExampleGame extends Game {
         if (this.background) {
             ctx.drawImage(this.background, 0, 0, Game.screenSize.width, Game.screenSize.height);
         }
-        this.bowController.renderBowAndArrows(ctx);
-        this.enemyController.renderEnemies(ctx);
+        this.bowActor.renderBowAndArrows(ctx);
+        this.enemyActor.renderEnemies(ctx);
         super.render();
     }
 }

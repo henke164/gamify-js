@@ -1,4 +1,4 @@
-class EnemyController {
+class EnemyActor {
     constructor() {
         this.ticksUntilNextSpawn = 0;
         this.enemies = new GameObjectArray();

@@ -1,10 +1,13 @@
 <html>
 <head>
+	<meta name="viewport" content="user-scalable=no,width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,shrink-to-fit=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
 	<script src="../src/input.js"></script>
 	<script src="../src/utilities.js"></script>
 	<script src="../src/game.js"></script>
-	<script src="../src/gameObject.js"></script>
-	<script src="../src/gameObjectArray.js"></script>
+	<script src="../src/game-object.js"></script>
+	<script src="../src/game-object-array.js"></script>
+	<script src="../src/collision-detector.js"></script>
 
 	<!-- Example files -->
 	<script src="examplegame.js"></script>
@@ -12,10 +15,10 @@
 	<script src="components/healthbar.js"></script>
 	<script src="components/monster.js"></script>
 	<script src="components/bow.js"></script>
+	<script src="components/bow-line.js"></script>
 
-	<script src="controllers/bowcontroller.js"></script>
-	<script src="controllers/enemycontroller.js"></script>
-	<script src="controllers/collisioncontroller.js"></script>
+	<script src="actors/bow-actor.js"></script>
+	<script src="actors/enemy-actor.js"></script>
 	<script>
 	window.onload = function() {
 		var gameField = document.getElementById("game");
@@ -24,8 +27,18 @@
 		game.setBackground("images/background.png");
 	}
 	</script>
+	<style>
+		body {
+			position: fixed;
+			overflow: hidden;
+			user-select: none;
+			height: 100%;
+			width: 100%;
+			margin: 0px;
+		}
+	</style>
 </head>
 <body>
-	<canvas id="game" width="600" height="800"></canvas>
+	<canvas id="game"></canvas>
 </body>
 </html>
