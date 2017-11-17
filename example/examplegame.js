@@ -1,60 +1,41 @@
 class ExampleGame extends Game {
     constructor(canvas) {
         super(canvas);
-        this.startDragLocation = new Vector2(0, 0);
-        this.addBow();
-        this.startMonsterSpawnInterval();
-
-        this.background = new Image;
-        this.background.src = "images/background.png";
+        this.bowController = new BowController();
+        this.enemyController = new EnemyController();
+        this.collisionController = new CollisionController();
     }
 
     update() {
-        this.isDragging = this.startDragLocation != Vector2.zero;
-        if (this.input.mouseState.leftButtonDown && !this.isDragging) {
-            this.startDragLocation = this.input.mouseState.position;
-        }
-
-        if (!this.input.mouseState.leftButtonDown && this.isDragging) {
-            var dist = Vector2.distance(this.input.mouseState.position, this.startDragLocation);
-            this.shootArrow(this.startDragLocation, dist);
-            this.startDragLocation = Vector2.zero;
-        }
-
+        this.bowController.update();
+        this.enemyController.update();
+        this.detectCollisions();
         super.update();
     }
 
-    addBow() {
-        this.bow = this.createGameObject(Bow);
-        this.bow.position = new Vector2(this.canvas.width / 2, this.canvas.height - 40);
+    detectCollisions() {
+        var collisions = this.collisionController.getCollisions(
+            this.bowController.arrows,
+            this.enemyController.enemies);
+
+        collisions.forEach(collision => {
+            collision.go1.shouldDestroy = true;
+            collision.go2.reduceHealth(collision.go2.speed);
+        });
+
     }
 
-    shootArrow(targetPosition, speed) {
-        var startPosition = new Vector2(this.bow.position.x, this.bow.position.y);
-        var arrow = this.createGameObject(Arrow)
-        arrow.position = startPosition;
-        arrow.faceTowards(targetPosition, TEXTURECORNER.TOP);
-        arrow.speed = speed / 10 > 3 ? speed / 10 : 3;
-        arrow.velocity = Vector2.direction(startPosition, targetPosition);
+    setBackground(src) {
+        this.background = new Image;
+        this.background.src = src;
     }
 
-    startMonsterSpawnInterval() {
-        var t = this;
-        setInterval(function () {
-            var monster = t.createGameObject(Monster);
-            monster.position = new Vector2(t.canvas.width / 2, 0);
-            monster.velocity = new Vector2(0, 1)
-            monster.speed = 4;
-        }, 8000);
-
-        var monster = t.createGameObject(Monster);
-        monster.position = new Vector2(t.canvas.width / 2, 0);
-        monster.velocity = new Vector2(0, 1)
-        monster.speed = 4;
-    }
-
-    render() {
-        this.ctx.drawImage(this.background, 0, 0, this.canvas.width, this.canvas.height);
+    render(ctx) {
+        if (this.background) {
+            ctx.drawImage(this.background, 0, 0, Game.screenSize.width, Game.screenSize.height);
+        }
+        this.bowController.renderBowAndArrows(ctx);
+        this.enemyController.renderEnemies(ctx);
         super.render();
     }
 }

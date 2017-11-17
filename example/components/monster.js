@@ -1,9 +1,9 @@
 class Monster extends GameObject {
-    constructor(game) {
-        super(game, "images/monster.png");
+    constructor() {
+        super("images/monster.png");
         this.startHealth = 100;
         this.currentHealth = 100;
-        this.healthBar = new HealthBar(game);
+        this.healthBar = new HealthBar();
     }
 
     update() {

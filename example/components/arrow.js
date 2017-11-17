@@ -1,36 +1,16 @@
 class Arrow extends GameObject {
-    constructor(game) {
-        super(game, "images/arrow.png");
-        this.power = 10;
+    constructor() {
+        super("images/arrow.png");
     }
 
     update() {
         super.update();
         if (this.position.y < 0 ||
-            this.position.y > this.game.canvas.height ||
+            this.position.y > Game.screenSize.height ||
             this.position.x < 0 ||
-            this.position.x > this.game.canvas.width) {
+            this.position.x > Game.screenSize.width) {
             this.destroy();
         }
-
-        this.isCollidingWithMonster();
-    }
-
-    isCollidingWithMonster() {
-        var t = this;
-        var monsters = this.game.gameObjects.filter(go => {
-            if(go instanceof Monster) {
-                return true;
-            }
-            return false;
-        });
-
-        monsters.forEach(monster => {
-            if(Vector2.distance(t.position, monster.position) < 20) {
-                monster.reduceHealth(this.power);
-                this.shouldDestroy = true;
-            }
-        });
     }
 
     render(ctx) {

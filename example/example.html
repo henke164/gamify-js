@@ -4,6 +4,7 @@
 	<script src="../src/utilities.js"></script>
 	<script src="../src/game.js"></script>
 	<script src="../src/gameObject.js"></script>
+	<script src="../src/gameObjectArray.js"></script>
 
 	<!-- Example files -->
 	<script src="examplegame.js"></script>
@@ -11,11 +12,16 @@
 	<script src="components/healthbar.js"></script>
 	<script src="components/monster.js"></script>
 	<script src="components/bow.js"></script>
+
+	<script src="controllers/bowcontroller.js"></script>
+	<script src="controllers/enemycontroller.js"></script>
+	<script src="controllers/collisioncontroller.js"></script>
 	<script>
 	window.onload = function() {
 		var gameField = document.getElementById("game");
 
 		var game = new ExampleGame(gameField);
+		game.setBackground("images/background.png");
 	}
 	</script>
 </head>
