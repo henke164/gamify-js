@@ -1,6 +1,6 @@
 class Bow extends GameObject {
     constructor(game) {
-        super(game, "bow.png");
+        super(game, "images/bow.png");
         this.speed = 30;
     }
 

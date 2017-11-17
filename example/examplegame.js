@@ -1,8 +1,12 @@
 class ExampleGame extends Game {
     constructor(canvas) {
         super(canvas);
-        this.addBow();
         this.startDragLocation = new Vector2(0, 0);
+        this.addBow();
+        this.startMonsterSpawnInterval();
+
+        this.background = new Image;
+        this.background.src = "images/background.png";
     }
 
     update() {
@@ -32,5 +36,25 @@ class ExampleGame extends Game {
         arrow.faceTowards(targetPosition, TEXTURECORNER.TOP);
         arrow.speed = speed / 10 > 3 ? speed / 10 : 3;
         arrow.velocity = Vector2.direction(startPosition, targetPosition);
+    }
+
+    startMonsterSpawnInterval() {
+        var t = this;
+        setInterval(function () {
+            var monster = t.createGameObject(Monster);
+            monster.position = new Vector2(t.canvas.width / 2, 0);
+            monster.velocity = new Vector2(0, 1)
+            monster.speed = 4;
+        }, 8000);
+
+        var monster = t.createGameObject(Monster);
+        monster.position = new Vector2(t.canvas.width / 2, 0);
+        monster.velocity = new Vector2(0, 1)
+        monster.speed = 4;
+    }
+
+    render() {
+        this.ctx.drawImage(this.background, 0, 0, this.canvas.width, this.canvas.height);
+        super.render();
     }
 }

@@ -4,9 +4,13 @@
 	<script src="../src/utilities.js"></script>
 	<script src="../src/game.js"></script>
 	<script src="../src/gameObject.js"></script>
+
+	<!-- Example files -->
 	<script src="examplegame.js"></script>
-	<script src="arrow.js"></script>
-	<script src="bow.js"></script>
+	<script src="components/arrow.js"></script>
+	<script src="components/healthbar.js"></script>
+	<script src="components/monster.js"></script>
+	<script src="components/bow.js"></script>
 	<script>
 	window.onload = function() {
 		var gameField = document.getElementById("game");
@@ -16,6 +20,6 @@
 	</script>
 </head>
 <body>
-	<canvas id="game" width="800" height="600"></canvas>
+	<canvas id="game" width="600" height="800"></canvas>
 </body>
 </html>
