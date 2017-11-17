@@ -6,10 +6,10 @@ class Bow extends GameObject {
         this.bowLine = new BowLine(this);
     }
 
-    update(dragDistance) {
-        this.bowLine.update(dragDistance);
+    update(pullDistance) {
+        this.bowLine.update(pullDistance);
 
-        if(dragDistance == 0) {
+        if(pullDistance == 0) {
             super.faceTowards(Game.input.mouseState.position, TEXTURECORNER.TOP);
         }
 

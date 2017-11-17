@@ -1,6 +1,6 @@
 class BowActor {
     constructor() {
-        this.startDragLocation = Vector2.zero;
+        this.startPullLocation = Vector2.zero;
         this.arrows = new GameObjectArray();
         this.addBow();
     }
@@ -11,30 +11,24 @@ class BowActor {
 
     update() {
         var mouseState = Game.input.mouseState;
-        this.isDragging = this.startDragLocation != Vector2.zero;
+        this.isPullingArrow = this.startPullLocation != Vector2.zero;
 
-        if (mouseState.leftButtonDown && !this.isDragging) {
-            this.startDragLocation = mouseState.position;
+        if (mouseState.leftButtonDown && !this.isPullingArrow) {
+            this.startPullLocation = mouseState.position;
             this.loadArrow();
         }
 
-        if(this.isDragging) {
-            this.dragDistance = Vector2.distance(Game.input.mouseState.position, this.startDragLocation);
-            var arrowOffset = this.dragDistance * 0.1;
-            if (arrowOffset < 9) {
-                var direction = Vector2.direction(this.startDragLocation, this.arrow.position);
-                this.arrow.position = new Vector2(
-                    this.bow.position.x + (direction.x * arrowOffset),
-                    this.bow.position.y + (direction.y * arrowOffset));
-            }
+        if(this.isPullingArrow) {
+            this.pullDistance = Vector2.distance(Game.input.mouseState.position, this.startPullLocation);
+            this.renderPullingArrow();
         }
 
-        if (!mouseState.leftButtonDown && this.isDragging) {
+        if (!mouseState.leftButtonDown && this.isPullingArrow) {
             this.shootArrow();
-            this.startDragLocation = Vector2.zero;
+            this.startPullLocation = Vector2.zero;
         }
 
-        this.bow.update(this.dragDistance);
+        this.bow.update(this.pullDistance);
 
         this.arrows.updateAll();
     }
@@ -43,13 +37,23 @@ class BowActor {
         this.arrow = this.arrows.addGameObject(Arrow)
         this.arrow.power = 2;
         this.arrow.position = new Vector2(this.bow.position.x, this.bow.position.y - 8.5);
-        this.arrow.faceTowards(this.startDragLocation, TEXTURECORNER.TOP);
+        this.arrow.faceTowards(this.startPullLocation, TEXTURECORNER.TOP);
     }
 
     shootArrow() {
-        this.arrow.speed = 10 + (this.dragDistance / 10);
-        this.arrow.velocity = Vector2.direction(this.arrow.position, this.startDragLocation);
-        this.dragDistance = 0;
+        this.arrow.speed = 10 + (this.pullDistance / 10);
+        this.arrow.velocity = Vector2.direction(this.arrow.position, this.startPullLocation);
+        this.pullDistance = 0;
+    }
+
+    renderPullingArrow() {
+        var arrowOffset = this.pullDistance * 0.1;
+        if (arrowOffset < 9) {
+            var direction = Vector2.direction(this.startPullLocation, this.arrow.position);
+            this.arrow.position = new Vector2(
+                this.bow.position.x + (direction.x * arrowOffset),
+                this.bow.position.y + (direction.y * arrowOffset));
+        }
     }
 
     renderBowAndArrows(ctx) {
