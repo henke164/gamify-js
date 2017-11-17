@@ -21,6 +21,15 @@ class Vector2 {
     }
 }
 
+class Rectangle {
+    constructor(x, y, width, height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
+}
+
 Vector2.zero = new Vector2(0, 0);
 
 var TEXTURECORNER = {

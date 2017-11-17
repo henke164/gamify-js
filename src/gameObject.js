@@ -1,6 +1,5 @@
 class GameObject {
-    constructor(game, texture) {
-        this.game = game;
+    constructor(texture) {
         this.rotation = 0;
         this.speed = 1;
         this.velocity = new Vector2(0, 0);
