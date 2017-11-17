@@ -7,6 +7,7 @@ class Input {
         };
 
         this.bindMouseEvents(canvas);
+        this.bindTouchEvents(canvas);
     }
 
     bindMouseEvents(canvas) {
@@ -31,6 +32,25 @@ class Input {
             if (evt.which == 3) {
                 this.mouseState.rightButtonDown = false;
             }
+        });
+    }
+
+    bindTouchEvents(canvas) {
+        canvas.addEventListener('touchmove', (evt) => {
+            var touch = evt.touches[0];
+            var rect = canvas.getBoundingClientRect();
+            this.mouseState.position = new Vector2(touch.clientX - rect.left, touch.clientY - rect.top);
+        });
+
+        canvas.addEventListener('touchstart', (evt) => {
+            var touch = evt.touches[0];
+            var rect = canvas.getBoundingClientRect();
+            this.mouseState.position = new Vector2(touch.clientX - rect.left, touch.clientY - rect.top);
+            this.mouseState.leftButtonDown = true;
+        });
+
+        canvas.addEventListener('touchend', () => {
+            this.mouseState.leftButtonDown = false;
         });
     }
 }
