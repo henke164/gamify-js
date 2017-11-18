@@ -3,12 +3,16 @@ class ExampleGame extends Game {
         super(canvas);
         this.bowActor = new BowActor();
         this.enemyActor = new EnemyActor();
+        this.score = 0;
+        this.scoreLabel = new Label(this.score, new Vector2(100, 100), 'red', '50px');
     }
 
     update() {
         this.bowActor.update();
         this.enemyActor.update();
         this.detectCollisions();
+        this.score++;
+        this.scoreLabel.text = this.score;
         super.update();
     }
 
@@ -36,6 +40,8 @@ class ExampleGame extends Game {
         }
         this.bowActor.renderBowAndArrows(ctx);
         this.enemyActor.renderEnemies(ctx);
+
+        this.scoreLabel.render(ctx);
         super.render();
     }
 }
