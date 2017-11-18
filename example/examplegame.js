@@ -5,30 +5,14 @@ class ExampleGame extends Game {
         this.enemyActor = new EnemyActor();
         this.score = 0;
         this.scoreLabel = new Label('Score: ' + this.score, new Vector2(50, 50), 'white', '50px');
+        this.gameRuleActor = new GameRuleActor(this, this.bowActor, this.enemyActor);
     }
 
     update() {
         this.bowActor.update();
         this.enemyActor.update();
-        this.detectCollisions();
+        this.gameRuleActor.update();
         super.update();
-    }
-
-    detectCollisions() {
-        var collisions = CollisionDetector.findCollisions(
-            this.bowActor.arrows,
-            this.enemyActor.enemies);
-
-        collisions.forEach(collision => {
-            var arrow = collision.go1;
-            var monster = collision.go2;
-            arrow.shouldDestroy = arrow.destroyOnImpact;
-            monster.reduceHealth(arrow.speed * arrow.power);
-            if (monster.shouldDestroy) {
-                this.score++;
-                this.scoreLabel.text = 'Score: ' + this.score;
-            }
-        });
     }
 
     setBackground(src) {
