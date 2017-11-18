@@ -4,15 +4,13 @@ class ExampleGame extends Game {
         this.bowActor = new BowActor();
         this.enemyActor = new EnemyActor();
         this.score = 0;
-        this.scoreLabel = new Label(this.score, new Vector2(100, 100), 'red', '50px');
+        this.scoreLabel = new Label('Score: ' + this.score, new Vector2(50, 50), 'white', '50px');
     }
 
     update() {
         this.bowActor.update();
         this.enemyActor.update();
         this.detectCollisions();
-        this.score++;
-        this.scoreLabel.text = this.score;
         super.update();
     }
 
@@ -26,6 +24,10 @@ class ExampleGame extends Game {
             var monster = collision.go2;
             arrow.shouldDestroy = arrow.destroyOnImpact;
             monster.reduceHealth(arrow.speed * arrow.power);
+            if (monster.shouldDestroy) {
+                this.score++;
+                this.scoreLabel.text = 'Score: ' + this.score;
+            }
         });
     }
 
