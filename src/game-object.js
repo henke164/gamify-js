@@ -1,22 +1,10 @@
 class GameObject {
-    constructor(texture) {
+    constructor() {
         this.rotation = 0;
         this.speed = 1;
         this.velocity = new Vector2(0, 0);
         this.position = new Vector2(0, 0);
         this.shouldDestroy = false;
-        this.loadTexture(texture);
-    }
-
-    loadTexture(texture) {
-        if(texture == null) {
-            return;
-        }
-
-        this.texture = new Image();
-        this.texture.src = texture;
-        this.texture.width = 120;
-        this.texture.height = 80;
     }
 
     update() {
@@ -40,18 +28,5 @@ class GameObject {
         this.shouldDestroy = true;
     }
 
-    render(ctx) {
-        if(this.texture == null) {
-            return;
-        }
-        ctx.save();
-        ctx.translate(this.position.x, this.position.y);
-        ctx.rotate(this.rotation * Math.PI / 180);
-        ctx.drawImage(this.texture,
-            -this.texture.width / 2,
-            -this.texture.height / 2,
-            this.texture.width,
-            this.texture.height);
-        ctx.restore();
-    }
+    render(ctx) {}
 }

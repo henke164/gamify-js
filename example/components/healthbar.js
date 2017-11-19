@@ -1,4 +1,4 @@
-class HealthBar extends GameObject {
+class HealthBar extends Sprite {
     constructor() {
         super("images/healthbar.png");
         this.texture.height = 5;

@@ -1,4 +1,4 @@
-class Arrow extends GameObject {
+class Arrow extends Sprite {
     constructor() {
         super("images/arrow.png");
         this.destroyOnImpact = true;

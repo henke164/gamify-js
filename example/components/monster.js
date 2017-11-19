@@ -1,13 +1,15 @@
-class Monster extends GameObject {
+class Monster extends Sprite {
     constructor() {
-        super("images/monster.png");
+        super('images/enemies/1_ORK/IDLE/IDLE_000.png');
         this.startHealth = 100;
         this.currentHealth = 100;
         this.healthBar = new HealthBar();
+        this.animator = new EnemyAnimator(this);
     }
 
     update() {
         this.healthBar.position = new Vector2(this.position.x, this.position.y - 40);
+        this.animator.update();
         super.update();
     }
 

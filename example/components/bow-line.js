@@ -1,4 +1,4 @@
-class BowLine extends GameObject {
+class BowLine extends Sprite {
     constructor(bow) {
         super("images/bowline.png");
         this.bow = bow;
