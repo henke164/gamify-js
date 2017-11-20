@@ -5,7 +5,7 @@ class ExampleGame extends Game {
         this.enemyActor = new EnemyActor();
         this.score = 0;
         this.scoreLabel = new Label('Score: ' + this.score, new Vector2(50, 50), 'white', '50px');
-        this.gameRuleActor = new GameRuleActor(this, this.bowActor, this.enemyActor);
+        this.gameRuleActor = new GameRuleActor(this);
     }
 
     update() {

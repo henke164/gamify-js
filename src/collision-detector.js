@@ -1,19 +1,19 @@
 class CollisionDetector {
     static findCollisions(arr1, arr2) {
         var collisions = [];
-        arr1.forEach(go1 => {
-            arr2.forEach(go2 => {
-                var midPoint1 = new Vector2(go1.position.x + (go1.texture.width / 2), go1.position.y + (go1.texture.height / 2));
-                var midPoint2 = new Vector2(go2.position.x + (go2.texture.width / 2), go2.position.y + (go2.texture.height / 2));
-                var widestTexture = go1.texture.width > go2.texture.width ? go1.texture.width : go2.texture.width;
+        for (var x = 0; x < arr1.length; x++) {
+            for (var y = 0; y < arr2.length; y++) {
+                var midPoint1 = new Vector2(arr1[x].position.x + (arr1[x].texture.width / 2), arr1[x].position.y + (arr1[x].texture.height / 2));
+                var midPoint2 = new Vector2(arr2[y].position.x + (arr2[y].texture.width / 2), arr2[y].position.y + (arr2[y].texture.height / 2));
+                var widestTexture = arr1[x].texture.width > arr2[y].texture.width ? arr1[x].texture.width : arr2[y].texture.width;
                 if(Vector2.distance(midPoint1, midPoint2) < (widestTexture / 2)) {
                     collisions.push({
-                        go1,
-                        go2
+                        gameObject1: arr1[x],
+                        gameObject2: arr2[y]
                     });
                 }
-            });
-        });
+            }
+        }
         return collisions;
     }
 }

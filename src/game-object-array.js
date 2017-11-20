@@ -15,10 +15,6 @@ class GameObjectArray {
         return obj;
     }
 
-    forEach(action) {
-        this.gameObjects.forEach(action);
-    }
-
     updateAll() {
         var idx = this.gameObjects.length
         while (idx--) {
@@ -31,8 +27,8 @@ class GameObjectArray {
     }
 
     renderAll(ctx) {
-        this.forEach((gameObject) => {
-            gameObject.render(ctx);
-        });
+        for (var x = 0; x < this.gameObjects.length; x++) {
+            this.gameObjects[x].render(ctx);
+        };
     }
 }

@@ -1,8 +1,7 @@
 class GameRuleActor
 {
-    constructor(game, bowActor, enemyActor) {
-        this.bowActor = bowActor;
-        this.enemyActor = enemyActor;
+    constructor(game) {
+        this.game = game;
         this.gameRules = [new DefaultGameRule(game)];
         this.onEnemyHit = this.onEnemyHit.bind(this);
     }
@@ -13,21 +12,21 @@ class GameRuleActor
 
     handleArrowAndEnemyCollisions() {
         var collisions = CollisionDetector.findCollisions(
-            this.bowActor.arrows,
-            this.enemyActor.enemies);
+            this.game.bowActor.arrows.gameObjects,
+            this.game.enemyActor.enemies.gameObjects);
 
         this.runActionForCollisions(collisions, this.onEnemyHit);
     }
 
     runActionForCollisions(collisions, action) {
-        collisions.forEach(collision => {
-            action(collision.go1, collision.go2);
-        });
+        for (var x = 0; x < collisions.length; x++) {
+            action(collisions[x].gameObject1, collisions[x].gameObject2);
+        }
     }
 
     onEnemyHit(arrow, enemy) {
-        this.gameRules.forEach(rule => {
-            rule.onEnemyHit(arrow, enemy);
-        });
+        for (var x = 0; x < this.gameRules.length; x++) {
+            this.gameRules[x].onEnemyHit(arrow, enemy);
+        }
     }
 }
