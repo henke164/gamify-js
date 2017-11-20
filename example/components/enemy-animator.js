@@ -2,21 +2,8 @@ class EnemyAnimator extends Animator {
     constructor(gameObject) {
         super(gameObject);
 
-        var idlePath = 'images/enemies/1_ORK/IDLE/IDLE_';
-        this.setIdleAnimation([
-            new Texture2D(idlePath + '000.png', null, 10)
-        ]);
-
-        var movementPath = 'images/enemies/1_ORK/RUN/RUN_';
-        this.setMovementAnimation([
-            new Texture2D(idlePath + '000.png', null, 10),
-            new Texture2D(idlePath + '001.png', null, 10),
-            new Texture2D(idlePath + '002.png', null, 10),
-            new Texture2D(idlePath + '003.png', null, 10),
-            new Texture2D(idlePath + '004.png', null, 10),
-            new Texture2D(idlePath + '005.png', null, 10),
-            new Texture2D(idlePath + '006.png', null, 10)
-        ]);
+        this.setIdleAnimation(OrcAnimations.idleAnimation);
+        this.setMovementAnimation(OrcAnimations.movementAnimation);
     }
 
     update() {
@@ -27,4 +14,25 @@ class EnemyAnimator extends Animator {
         }
         super.update();
     }
+}
+
+var OrcAnimations = {
+    idleAnimation: [
+        new Texture2D('images/enemies/1_ORK/IDLE/IDLE_000.png', null, 50),
+        new Texture2D('images/enemies/1_ORK/IDLE/IDLE_001.png', null, 50),
+        new Texture2D('images/enemies/1_ORK/IDLE/IDLE_002.png', null, 50),
+        new Texture2D('images/enemies/1_ORK/IDLE/IDLE_003.png', null, 50),
+        new Texture2D('images/enemies/1_ORK/IDLE/IDLE_004.png', null, 50),
+        new Texture2D('images/enemies/1_ORK/IDLE/IDLE_005.png', null, 50),
+        new Texture2D('images/enemies/1_ORK/IDLE/IDLE_006.png', null, 50)
+    ],
+    movementAnimation: [
+        new Texture2D('images/enemies/1_ORK/RUN/RUN_000.png', null, 50),
+        new Texture2D('images/enemies/1_ORK/RUN/RUN_001.png', null, 50),
+        new Texture2D('images/enemies/1_ORK/RUN/RUN_002.png', null, 50),
+        new Texture2D('images/enemies/1_ORK/RUN/RUN_003.png', null, 50),
+        new Texture2D('images/enemies/1_ORK/RUN/RUN_004.png', null, 50),
+        new Texture2D('images/enemies/1_ORK/RUN/RUN_005.png', null, 50),
+        new Texture2D('images/enemies/1_ORK/RUN/RUN_006.png', null, 50)
+    ],
 }
