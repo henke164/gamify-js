@@ -1,6 +1,6 @@
 class BowLine extends Sprite {
     constructor(bow) {
-        super("images/bowline.png");
+        super(new Texture2D("images/bowline.png"));
         this.bow = bow;
 
         this.texture.height = 60;
@@ -16,9 +16,5 @@ class BowLine extends Sprite {
             this.texture.height = 600;
             this.position.y = this.bow.position.y - 27;
         }
-    }
-
-    render(ctx) {
-        super.render(ctx);
     }
 }

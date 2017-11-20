@@ -13,8 +13,8 @@ class EnemyActor {
         this.enemies.updateAll();
     }
 
-    renderEnemies(ctx) {
-        this.enemies.renderAll(ctx);
+    renderEnemies(spriteBatch) {
+        this.enemies.renderAll(spriteBatch);
     }
 
     spawnMonster() {

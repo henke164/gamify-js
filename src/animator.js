@@ -16,7 +16,7 @@ class Animator {
     setMovementAnimation(animation) {
         this._addAnimationsToArray(animation, this.movementAnimation);
     }
-    
+
     setDamageAnimation(animation) {
         this._addAnimationsToArray(animation, this.damageAnimation);
     }
@@ -26,13 +26,9 @@ class Animator {
     }
 
     _addAnimationsToArray(animations, array) {
-        animations.forEach(item => {
-            var img = new Image;
-            img.src = item;
-            img.width = this.gameObject.texture.width;
-            img.height = this.gameObject.texture.height;
-            array.push(img);
-        });
+        for (var x = 0; x < animations.length; x++) {
+            array.push(animations[x]);
+        }
     }
 
     update() {

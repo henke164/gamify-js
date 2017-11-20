@@ -1,15 +1,22 @@
 class EnemyAnimator extends Animator {
     constructor(gameObject) {
         super(gameObject);
-        this.setIdleAnimation(['images/enemies/1_ORK/IDLE/IDLE_000.png']);
+
+        var idlePath = 'images/enemies/1_ORK/IDLE/IDLE_';
+        this.setIdleAnimation([
+            new Texture2D(idlePath + '000.png', null, 10)
+        ]);
+
+        var movementPath = 'images/enemies/1_ORK/RUN/RUN_';
         this.setMovementAnimation([
-            'images/enemies/1_ORK/RUN/RUN_000.png', 
-            'images/enemies/1_ORK/RUN/RUN_001.png', 
-            'images/enemies/1_ORK/RUN/RUN_002.png', 
-            'images/enemies/1_ORK/RUN/RUN_003.png', 
-            'images/enemies/1_ORK/RUN/RUN_004.png', 
-            'images/enemies/1_ORK/RUN/RUN_005.png', 
-            'images/enemies/1_ORK/RUN/RUN_006.png']);
+            new Texture2D(idlePath + '000.png', null, 10),
+            new Texture2D(idlePath + '001.png', null, 10),
+            new Texture2D(idlePath + '002.png', null, 10),
+            new Texture2D(idlePath + '003.png', null, 10),
+            new Texture2D(idlePath + '004.png', null, 10),
+            new Texture2D(idlePath + '005.png', null, 10),
+            new Texture2D(idlePath + '006.png', null, 10)
+        ]);
     }
 
     update() {

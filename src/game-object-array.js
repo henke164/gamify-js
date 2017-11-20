@@ -26,9 +26,9 @@ class GameObjectArray {
         this.length = this.gameObjects.length;
     }
 
-    renderAll(ctx) {
+    renderAll(spriteBatch) {
         for (var x = 0; x < this.gameObjects.length; x++) {
-            this.gameObjects[x].render(ctx);
+            this.gameObjects[x].render(spriteBatch);
         };
     }
 }

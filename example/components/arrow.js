@@ -1,6 +1,6 @@
 class Arrow extends Sprite {
     constructor() {
-        super("images/arrow.png");
+        super(new Texture2D("images/arrow.png"));
         this.destroyOnImpact = true;
         this.power = 1;
     }
@@ -15,7 +15,7 @@ class Arrow extends Sprite {
         }
     }
 
-    render(ctx) {
-        super.render(ctx);
+    render(spriteBatch) {
+        super.render(spriteBatch);
     }
 }

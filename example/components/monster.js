@@ -1,10 +1,11 @@
 class Monster extends Sprite {
     constructor() {
-        super('images/enemies/1_ORK/IDLE/IDLE_000.png');
+        super();
         this.startHealth = 100;
         this.currentHealth = 100;
         this.healthBar = new HealthBar();
         this.animator = new EnemyAnimator(this);
+        this.texture = this.animator.idleAnimation[0];
     }
 
     update() {
@@ -26,8 +27,8 @@ class Monster extends Sprite {
         }
     }
 
-    render(ctx) {
-        this.healthBar.render(ctx);
-        super.render(ctx);
+    render(spriteBatch) {
+        this.healthBar.render(spriteBatch);
+        super.render(spriteBatch);
     }
 }

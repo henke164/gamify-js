@@ -8,9 +8,8 @@ class Label
         this.fontColor = fontColor;
     }
 
-    render(ctx) {
-        ctx.font = this.fontSize + ' ' + this.fontName;
-        ctx.fillStyle = this.fontColor;
-        ctx.fillText(this.text, this.position.x, this.position.y);
+    render(spriteBatch) {
+        var font = this.fontSize + ' ' + this.fontName;
+        spriteBatch.drawText(this.text, this.position, font, this.fontColor);
     }
 }

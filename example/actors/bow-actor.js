@@ -56,8 +56,8 @@ class BowActor {
         }
     }
 
-    renderBowAndArrows(ctx) {
-        this.arrows.renderAll(ctx);
-        this.bow.render(ctx);
+    renderBowAndArrows(spriteBatch) {
+        this.arrows.renderAll(spriteBatch);
+        this.bow.render(spriteBatch);
     }
 }

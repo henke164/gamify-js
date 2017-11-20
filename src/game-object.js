@@ -28,5 +28,5 @@ class GameObject {
         this.shouldDestroy = true;
     }
 
-    render(ctx) {}
+    render(spriteBatch) {}
 }
