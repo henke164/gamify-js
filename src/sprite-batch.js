@@ -18,7 +18,7 @@ class SpriteBatch {
     }
 
 
-    drawTexture(texture, position, rotation) {
+    drawRotatedTexture(texture, position, rotation) {
         if (texture == null || !texture.loaded) {
             return;
         }

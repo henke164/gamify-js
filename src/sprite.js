@@ -6,6 +6,6 @@ class Sprite extends GameObject {
     }
 
     render(spriteBatch) {
-        spriteBatch.drawTexture(this.texture, this.position, this.rotation);
+        spriteBatch.drawRotatedTexture(this.texture, this.position, this.rotation);
     }
 }
