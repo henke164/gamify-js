@@ -1,6 +1,6 @@
 class Arrow extends Sprite {
     constructor() {
-        super(new Texture2D("images/arrow.png"));
+        super(Textures['arrows.default']);
         this.destroyOnImpact = true;
         this.power = 1;
     }

@@ -2,7 +2,7 @@ class MultiShotRule
 {
     constructor(game) {
         this.game = game;
-        this.level = 4;
+        this.level = 5;
     }
 
     onShoot() {
