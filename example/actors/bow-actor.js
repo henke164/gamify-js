@@ -1,11 +1,8 @@
 class BowActor {
-    constructor() {
+    constructor(onShoot) {
+        this.onShoot = onShoot;
         this.startPullLocation = Vector2.zero;
         this.arrows = new GameObjectArray();
-        this.addBow();
-    }
-
-    addBow() {
         this.bow = new Bow();
     }
 
@@ -15,7 +12,7 @@ class BowActor {
 
         if (mouseState.leftButtonDown && !this.isPullingArrow) {
             this.startPullLocation = mouseState.position;
-            this.loadArrow();
+            this.startPulling();
         }
 
         if(this.isPullingArrow) {
@@ -24,7 +21,7 @@ class BowActor {
         }
 
         if (!mouseState.leftButtonDown && this.isPullingArrow) {
-            this.shootArrow();
+            this.onShoot();
             this.startPullLocation = Vector2.zero;
         }
 
@@ -33,17 +30,11 @@ class BowActor {
         this.arrows.updateAll();
     }
 
-    loadArrow() {
+    startPulling() {
         this.arrow = this.arrows.addGameObject(Arrow);
         this.arrow.power = 2;
         this.arrow.position = new Vector2(this.bow.position.x, this.bow.position.y - 8.5);
         this.arrow.faceTowards(this.startPullLocation, TEXTURECORNER.TOP);
-    }
-
-    shootArrow() {
-        this.arrow.speed = 10 + (this.pullDistance / 10);
-        this.arrow.velocity = Vector2.direction(this.arrow.position, this.startPullLocation);
-        this.pullDistance = 0;
     }
 
     renderPullingArrow() {

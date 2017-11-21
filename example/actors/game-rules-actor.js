@@ -2,16 +2,15 @@ class GameRulesActor
 {
     constructor(game) {
         this.game = game;
-        this.gameRules = [new DefaultGameRule(game)];
+        this.gameRules = [new MultiShotRule(game), new DefaultGameRule(game)];
+
         this.onEnemyHit = this.onEnemyHit.bind(this);
+        this.onShoot = this.onShoot.bind(this);
     }
 
     onShoot() {
-        var arrow = this.game.bowActor.arrow;
-        var pullDistance = this.game.bowActor.pullDistance;
-
         for (var x = 0; x < this.gameRules.length; x++) {
-            this.gameRules.onShoot(arrow, pullDistance)
+            this.gameRules[x].onShoot()
         }
     }
 

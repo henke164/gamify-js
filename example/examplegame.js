@@ -1,11 +1,11 @@
 class ExampleGame extends Game {
     constructor(canvas) {
         super(canvas);
-        this.bowActor = new BowActor();
         this.enemyActor = new EnemyActor();
+        this.gameRuleActor = new GameRulesActor(this);
+        this.bowActor = new BowActor(this.gameRuleActor.onShoot);
         this.score = 0;
         this.scoreLabel = new Label('Score: ' + this.score, new Vector2(50, 50), 'white', '50px');
-        this.gameRuleActor = new GameRulesActor(this);
     }
 
     update() {
