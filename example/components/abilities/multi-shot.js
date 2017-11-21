@@ -34,7 +34,7 @@ class MultiShotAbility
         var bowActor = this.game.bowActor;
         var mainArrow = bowActor.arrow;
         var arrow = bowActor.arrows.addGameObject(Arrow);
-        arrow.power = mainArrow.power;
+        arrow.power = mainArrow.power / 2;
         arrow.position = new Vector2(mainArrow.position.x, mainArrow.position.y);
         arrow.speed = 10 + (bowActor.pullDistance / 10);
         arrow.faceTowards(targetLocation, TEXTURECORNER.TOP);
@@ -55,3 +55,9 @@ class MultiShotAbility
 
     onEnemyHit(arrow, enemy) {}
 }
+
+MultiShotAbility.icon = new Texture2D('images/abilities/weapon_14.png', 80);
+
+MultiShotAbility.spellName = 'Frostclones';
+
+MultiShotAbility.description = ['Fires 1 additional arrow per level,', 'that deals 50% of the main arrow', 'damage.'];

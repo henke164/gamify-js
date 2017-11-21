@@ -4,13 +4,13 @@ class MenuScene {
         this.startButton = new Button();
         this.startButton.text = 'Start Game';
         this.startButton.onClick = () => {
-            game.currentScene = game.scenes[1];
+            game.setInGameScene();
         };
 
         this.talentButton = new Button();
         this.talentButton.text = 'Skills';
         this.talentButton.onClick = () => {
-            game.currentScene = game.scenes[2];
+            game.setAbilityTreeScene();
         };
     }
 

@@ -10,9 +10,9 @@ class AbilityActor
     initializeAbilities() {
         this.abilities = [];
 
-        for(var x = 0; x < User.abilities.length; x++) {
-            var ability = User.abilities[x].type;
-            var level = User.abilities[x].level;
+        for(var x = 0; x < Player.abilities.length; x++) {
+            var ability = Player.abilities[x].type;
+            var level = Player.abilities[x].level;
             this.abilities.push(new ability(this.game, level));
         }
 

@@ -17,6 +17,16 @@
 	<!-- Scenes -->
 	<script src="scenes/menu.js"></script>
 	<script src="scenes/ingame.js"></script>
+	<script src="scenes/ability-tree.js"></script>
+
+	<!-- Abilities -->
+	<script src="components/abilities/default.js"></script>
+	<script src="components/abilities/multi-shot.js"></script>
+
+	<!-- Actors -->
+	<script src="actors/bow-actor.js"></script>
+	<script src="actors/enemy-actor.js"></script>
+	<script src="actors/ability-actor.js"></script>
 
 	<!-- Components -->
 	<script src="examplegame.js"></script>
@@ -27,23 +37,8 @@
 	<script src="components/healthbar.js"></script>
 	<script src="components/monster.js"></script>
 	<script src="components/bow.js"></script>
-
-	<!-- Abilities -->
-	<script src="components/abilities/default.js"></script>
-	<script src="components/abilities/multi-shot.js"></script>
-
-	<!-- Actors -->
-	<script src="actors/bow-actor.js"></script>
-	<script src="actors/enemy-actor.js"></script>
-	<script src="actors/ability-actor.js"></script>
+	<script src="components/player.js"></script>
 	<script>
-	var User = {
-		abilities:[{
-			type: MultiShotAbility,
-			level: 2
-		}]
-	}
-
 	window.onload = function() {
 		var gameField = document.getElementById("game");
 
