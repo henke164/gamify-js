@@ -14,8 +14,13 @@
 	<script src="../src/sprite-batch.js"></script>
 	<script src="../src/texture.js"></script>
 
+	<!-- Scenes -->
+	<script src="scenes/menu.js"></script>
+	<script src="scenes/ingame.js"></script>
+
 	<!-- Components -->
 	<script src="examplegame.js"></script>
+	<script src="components/button.js"></script>
 	<script src="components/textures.js"></script>
 	<script src="components/enemy-animator.js"></script>
 	<script src="components/arrow.js"></script>
@@ -23,20 +28,26 @@
 	<script src="components/monster.js"></script>
 	<script src="components/bow.js"></script>
 
-	<!-- Rules -->
-	<script src="components/game-rules/default.js"></script>
-	<script src="components/game-rules/multi-shot.js"></script>
+	<!-- Abilities -->
+	<script src="components/abilities/default.js"></script>
+	<script src="components/abilities/multi-shot.js"></script>
 
 	<!-- Actors -->
 	<script src="actors/bow-actor.js"></script>
 	<script src="actors/enemy-actor.js"></script>
-	<script src="actors/game-rules-actor.js"></script>
+	<script src="actors/ability-actor.js"></script>
 	<script>
+	var User = {
+		abilities:[{
+			type: MultiShotAbility,
+			level: 2
+		}]
+	}
+
 	window.onload = function() {
 		var gameField = document.getElementById("game");
 
 		var game = new ExampleGame(gameField);
-		game.setBackground("images/background.png");
 	}
 	</script>
 	<style>

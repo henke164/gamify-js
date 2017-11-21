@@ -9,14 +9,14 @@ class Monster extends Sprite {
     }
 
     update() {
-        this.healthBar.position = new Vector2(this.position.x, this.position.y - 40);
+        this.healthBar.position = new Vector2(this.position.x, this.position.y - 30);
         this.animator.update();
         super.update();
     }
 
     reduceHealth(amount) {
         this.currentHealth -= amount;
-        this.healthBar.texture.width = this.currentHealth;
+        this.healthBar.texture.width = this.currentHealth / 2;
 
         if (this.currentHealth <= 0) {
             this.shouldDestroy = true;

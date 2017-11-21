@@ -1,18 +1,22 @@
-class MultiShotRule
+class MultiShotAbility
 {
-    constructor(game) {
+    constructor(game, level) {
         this.game = game;
-        this.level = 5;
+        this.level = level;
     }
 
     onShoot() {
         var bowActor = this.game.bowActor;
         var mainArrow = bowActor.arrow;
-        var angle = 45 / this.level;
+        var angle = this.level * 3;
+
+        if (angle > 45 / this.level) {
+            angle = 45 / this.level;
+        }
 
         var rotation = mainArrow.rotation + angle;
         var dist = Vector2.distance(bowActor.startPullLocation, bowActor.bow.position);
-        for(var x = 0; x < this.level / 2; x++) {
+        for(var x = 0; x < Math.floor(this.level / 2); x++) {
             var targetLocation = this.getTargetLocation(bowActor.bow.position, rotation, dist);
             this.shootClonedArrowTowardsDirection(targetLocation);
             rotation += angle;

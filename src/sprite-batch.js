@@ -34,7 +34,7 @@ class SpriteBatch {
         this.context.restore();
     }
 
-    drawText(text, position, font, color) {
+    drawText(text, position, font = '12px Arial', color = 'black') {
         this.context.font = font;
         this.context.fillStyle = color;
         this.context.fillText(text, position.x, position.y);

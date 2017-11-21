@@ -5,16 +5,22 @@ class Texture2D extends Image {
         this.onload = function() {
             var originalWidth = this.width;
             var originalHeight = this.height;
-            var nPercent = 1;
 
             if (width && !height) {
-                nPercent = width / originalWidth;
+                var nPercent = width / originalWidth;
+                this.width = originalWidth * nPercent;
+                this.height = originalHeight * nPercent;
             } else if (height && !width) {
-                nPercent = height / originalHeight;
+                var nPercent = height / originalHeight;
+                this.width = originalWidth * nPercent;
+                this.height = originalHeight * nPercent;
+            } else if (height && width) {
+                this.width = width;
+                this.height = height;
+            } else {
+                this.width = originalWidth;
+                this.height = originalHeight;
             }
-
-            this.width = originalWidth * nPercent;
-            this.height = originalHeight * nPercent;
             this.loaded = true;
         };
     }

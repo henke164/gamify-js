@@ -28,6 +28,11 @@ class Rectangle {
         this.width = width;
         this.height = height;
     }
+
+    embraces(point) {
+        return point.x > this.x && point.x < this.x + this.width &&
+        point.y > this.y && point.y < this.y + this.height;
+    }
 }
 
 Vector2.zero = new Vector2(0, 0);

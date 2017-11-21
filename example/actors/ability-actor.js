@@ -1,16 +1,27 @@
-class GameRulesActor
+class AbilityActor
 {
     constructor(game) {
         this.game = game;
-        this.gameRules = [new MultiShotRule(game), new DefaultGameRule(game)];
-
+        this.initializeAbilities();
         this.onEnemyHit = this.onEnemyHit.bind(this);
         this.onShoot = this.onShoot.bind(this);
     }
 
+    initializeAbilities() {
+        this.abilities = [];
+
+        for(var x = 0; x < User.abilities.length; x++) {
+            var ability = User.abilities[x].type;
+            var level = User.abilities[x].level;
+            this.abilities.push(new ability(this.game, level));
+        }
+
+        this.abilities.push(new DefaultAbility(this.game));
+    }
+
     onShoot() {
-        for (var x = 0; x < this.gameRules.length; x++) {
-            this.gameRules[x].onShoot()
+        for (var x = 0; x < this.abilities.length; x++) {
+            this.abilities[x].onShoot()
         }
     }
 
@@ -33,8 +44,8 @@ class GameRulesActor
     }
 
     onEnemyHit(arrow, enemy) {
-        for (var x = 0; x < this.gameRules.length; x++) {
-            this.gameRules[x].onEnemyHit(arrow, enemy);
+        for (var x = 0; x < this.abilities.length; x++) {
+            this.abilities[x].onEnemyHit(arrow, enemy);
         }
     }
 }

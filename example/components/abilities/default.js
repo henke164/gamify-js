@@ -1,4 +1,4 @@
-class DefaultGameRule
+class DefaultAbility
 {
     constructor(game) {
         this.game = game;
