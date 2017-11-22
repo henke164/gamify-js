@@ -12,8 +12,7 @@ class Input {
 
     bindMouseEvents(canvas) {
         canvas.addEventListener('mousemove', (evt) => {
-            var rect = canvas.getBoundingClientRect();
-            this.mouseState.position = new Vector2(evt.clientX - rect.left, evt.clientY - rect.top);
+            this.mouseState.position = new Vector2(evt.layerX, evt.layerY);
         });
 
         canvas.addEventListener('mousedown', (evt) => {
@@ -38,8 +37,7 @@ class Input {
     bindTouchEvents(canvas) {
         canvas.addEventListener('touchmove', (evt) => {
             var touch = evt.touches[0];
-            var rect = canvas.getBoundingClientRect();
-            this.mouseState.position = new Vector2(touch.clientX - rect.left, touch.clientY - rect.top);
+            this.mouseState.position = new Vector2(evt.layerX, evt.layerY);
         });
 
         canvas.addEventListener('touchstart', (evt) => {

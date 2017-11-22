@@ -1,24 +1,14 @@
 class AbilityTreeScene {
     constructor(game) {
         this.background = new Texture2D('images/background.png', Game.screenSize.width, Game.screenSize.height);
-        this.panel = new Texture2D('images/panel.png', Game.screenSize.width, Game.screenSize.height);
-        this.selectedAbility = MultiShotAbility;
+        this.panel = new Texture2D('images/panel.png', Game.screenSize.width);
+
+        this.selectedAbility = null;
 
         this.backButton = new Button();
         this.backButton.text = 'Back';
         this.backButton.onClick = () => {
             game.setMenuScene();
-        };
-
-        this.upgradeButton = new Button();
-        this.upgradeButton.text = 'Upgrade';
-        this.upgradeButton.onClick = () => {
-            for (var x = 0; x < Player.abilities.length; x++) {
-                if (Player.abilities[x].type == this.selectedAbility) {
-                    Player.abilities[x].level++;
-                }
-            }
-            console.log(Player.abilities);
         };
     }
 
@@ -28,12 +18,6 @@ class AbilityTreeScene {
             Game.screenSize.height - 200);
 
         this.backButton.update();
-
-        this.upgradeButton.position = new Vector2(
-            (Game.screenSize.width / 2) - (this.upgradeButton.texture.width / 2),
-            Game.screenSize.height - 400);
-
-        this.upgradeButton.update();
     }
 
     render(spriteBatch) {
@@ -42,10 +26,37 @@ class AbilityTreeScene {
 
         if (this.selectedAbility) {
             this.renderSelectedAbility(spriteBatch);
+        } else {
+            this.renderGeneralTree(spriteBatch);
         }
-
-        this.upgradeButton.render(spriteBatch);
+        
         this.backButton.render(spriteBatch);
+    }
+
+    renderGeneralTree(spriteBatch) {
+        spriteBatch.drawTexture(SpeedIncreaseAbility.icon, new Vector2(50, 50));
+        spriteBatch.drawTexture(MultiShotAbility.icon, new Vector2(190, 50));
+        spriteBatch.drawTexture(MultiShotAbility.icon, new Vector2(340, 50));
+        
+        spriteBatch.drawText('0/10', new Vector2(75, 145), "12px Arial", 'white');
+        spriteBatch.drawText('0/10', new Vector2(215, 145), "12px Arial", 'white');
+        spriteBatch.drawText('0/10', new Vector2(365, 145), "12px Arial", 'white');
+        
+        spriteBatch.drawTexture(SpeedIncreaseAbility.icon, new Vector2(50, 200));
+        spriteBatch.drawTexture(MultiShotAbility.icon, new Vector2(190, 200));
+        spriteBatch.drawTexture(MultiShotAbility.icon, new Vector2(340, 200));
+        
+        spriteBatch.drawText('0/10', new Vector2(75, 295), "12px Arial", 'white');
+        spriteBatch.drawText('0/10', new Vector2(215, 295), "12px Arial", 'white');
+        spriteBatch.drawText('0/10', new Vector2(365, 295), "12px Arial", 'white');
+        
+        spriteBatch.drawTexture(SpeedIncreaseAbility.icon, new Vector2(50, 350));
+        spriteBatch.drawTexture(MultiShotAbility.icon, new Vector2(190, 350));
+        spriteBatch.drawTexture(MultiShotAbility.icon, new Vector2(340, 350));
+
+        spriteBatch.drawText('0/10', new Vector2(75, 445), "12px Arial", 'white');
+        spriteBatch.drawText('0/10', new Vector2(215, 445), "12px Arial", 'white');
+        spriteBatch.drawText('0/10', new Vector2(365, 445), "12px Arial", 'white');
     }
 
     renderSelectedAbility(spriteBatch) {

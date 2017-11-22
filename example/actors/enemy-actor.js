@@ -7,7 +7,7 @@ class EnemyActor {
     update() {
         if (this.ticksUntilNextSpawn <= 0) {
             this.spawnMonster();
-            this.ticksUntilNextSpawn = 10;
+            this.ticksUntilNextSpawn = 100;
         }
         this.ticksUntilNextSpawn--;
         this.enemies.updateAll();

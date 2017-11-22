@@ -33,10 +33,9 @@ class MultiShotAbility
     shootClonedArrowTowardsDirection(targetLocation) {
         var bowActor = this.game.bowActor;
         var mainArrow = bowActor.arrow;
-        var arrow = bowActor.arrows.addGameObject(Arrow);
-        arrow.power = mainArrow.power / 2;
+        var arrow = bowActor.arrows.addGameObject(FrostArrow);
         arrow.position = new Vector2(mainArrow.position.x, mainArrow.position.y);
-        arrow.speed = 10 + (bowActor.pullDistance / 10);
+        arrow.speed = mainArrow.speed;
         arrow.faceTowards(targetLocation, TEXTURECORNER.TOP);
         arrow.velocity = Vector2.direction(mainArrow.position, targetLocation);
     }
@@ -56,8 +55,8 @@ class MultiShotAbility
     onEnemyHit(arrow, enemy) {}
 }
 
-MultiShotAbility.icon = new Texture2D('images/abilities/weapon_14.png', 80);
+MultiShotAbility.icon = new Texture2D('images/abilities/blizzard.png', 80);
 
-MultiShotAbility.spellName = 'Frostclones';
+MultiShotAbility.spellName = 'Blizzard';
 
-MultiShotAbility.description = ['Fires 1 additional arrow per level,', 'that deals 50% of the main arrow', 'damage.'];
+MultiShotAbility.description = ['Fires 1 additional frost arrow per level', 'that deals 50% of the main arrow', 'damage.'];

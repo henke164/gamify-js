@@ -1,8 +1,6 @@
 class Game {
     constructor(canvas) {
         this.canvas = canvas;
-        this.canvas.width = document.body.clientWidth;
-        this.canvas.height = document.body.clientHeight;
         this.canvas.userSelect = 'none';
         this.spriteBatch = new SpriteBatch(canvas);
 

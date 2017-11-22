@@ -17,11 +17,11 @@ class MenuScene {
     update() {
         this.startButton.position = new Vector2(
             (Game.screenSize.width / 2) - (this.startButton.texture.width / 2),
-            Game.screenSize.height / 4);
+            Game.screenSize.height / 2 - 100);
 
         this.talentButton.position = new Vector2(
             (Game.screenSize.width / 2) - (this.talentButton.texture.width / 2),
-            Game.screenSize.height / 2.3);
+            Game.screenSize.height / 2);
 
         this.startButton.update();
         this.talentButton.update();

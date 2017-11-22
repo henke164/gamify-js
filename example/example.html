@@ -21,6 +21,7 @@
 
 	<!-- Abilities -->
 	<script src="components/abilities/default.js"></script>
+	<script src="components/abilities/speed-increase.js"></script>
 	<script src="components/abilities/multi-shot.js"></script>
 
 	<!-- Actors -->
@@ -34,6 +35,7 @@
 	<script src="components/textures.js"></script>
 	<script src="components/enemy-animator.js"></script>
 	<script src="components/arrow.js"></script>
+	<script src="components/frost-arrow.js"></script>
 	<script src="components/healthbar.js"></script>
 	<script src="components/monster.js"></script>
 	<script src="components/bow.js"></script>
@@ -47,16 +49,21 @@
 	</script>
 	<style>
 		body {
+			background: black;
 			position: fixed;
 			overflow: hidden;
 			user-select: none;
 			height: 100%;
 			width: 100%;
-			margin: 0px;
+		}
+
+		canvas {
+			display: block;
+			margin: auto;
 		}
 	</style>
 </head>
 <body>
-	<canvas id="game"></canvas>
+	<canvas id="game" width="475" height="844"></canvas>
 </body>
 </html>

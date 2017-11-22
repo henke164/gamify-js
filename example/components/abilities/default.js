@@ -6,7 +6,11 @@ class DefaultAbility
 
     onShoot() {
         var bowActor = this.game.bowActor;
-        bowActor.arrow.speed = 10 + (bowActor.pullDistance / 10);
+        
+        if (bowActor.arrow.speed == 0) {
+            bowActor.arrow.speed = 10 + (bowActor.pullDistance / 10);
+        }
+
         bowActor.arrow.velocity = Vector2.direction(bowActor.arrow.position, bowActor.startPullLocation);
         bowActor.pullDistance = 0;
     }
