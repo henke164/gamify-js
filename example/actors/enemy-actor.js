@@ -1,13 +1,15 @@
 class EnemyActor {
-    constructor() {
-        this.ticksUntilNextSpawn = 0;
+    constructor(level) {
+        this.statsProvider = new StatsProvider(level);
         this.enemies = new GameObjectArray();
+        this.ticksUntilNextSpawn = 0;
+        this.level = level;
     }
 
     update() {
         if (this.ticksUntilNextSpawn <= 0) {
             this.spawnMonster();
-            this.ticksUntilNextSpawn = 10;
+            this.ticksUntilNextSpawn = this.statsProvider.getRandomDecreasingNumber(10);
         }
         this.ticksUntilNextSpawn--;
         this.enemies.updateAll();
@@ -23,5 +25,6 @@ class EnemyActor {
         monster.position = new Vector2(rnd, 0);
         monster.velocity = new Vector2(0, 1)
         monster.speed = 4;
+        monster.setHealth(this.statsProvider.getBaseValue());
     }
 }

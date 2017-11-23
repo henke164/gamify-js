@@ -1,11 +1,14 @@
 class Monster extends Sprite {
     constructor() {
         super();
-        this.startHealth = 100;
-        this.currentHealth = 100;
         this.healthBar = new HealthBar();
         this.animator = new EnemyAnimator(this);
         this.texture = this.animator.idleAnimation[0];
+    }
+
+    setHealth(health) {
+        this.startHealth = health;
+        this.currentHealth = health;
     }
 
     update() {
@@ -16,7 +19,7 @@ class Monster extends Sprite {
 
     reduceHealth(amount) {
         this.currentHealth -= amount;
-        this.healthBar.texture.width = this.currentHealth / 2;
+        this.healthBar.texture.width = (this.currentHealth / this.startHealth) * 50;
 
         if (this.currentHealth <= 0) {
             this.shouldDestroy = true;

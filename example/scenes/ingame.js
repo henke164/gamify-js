@@ -1,6 +1,6 @@
 class InGameScene {
-    constructor() {
-        this.enemyActor = new EnemyActor();
+    constructor(game, level) {
+        this.enemyActor = new EnemyActor(level);
         this.abilityActor = new AbilityActor(this);
         this.bowActor = new BowActor(this.abilityActor.onShoot);
         this.score = 0;
