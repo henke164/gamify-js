@@ -1,4 +1,4 @@
-class AbilityActor
+class AbilityController
 {
     constructor(game) {
         this.game = game;
@@ -31,8 +31,8 @@ class AbilityActor
 
     handleArrowAndEnemyCollisions() {
         var collisions = CollisionDetector.findCollisions(
-            this.game.bowActor.arrows.gameObjects,
-            this.game.enemyActor.enemies.gameObjects);
+            this.game.bowController.arrows.gameObjects,
+            this.game.enemyController.enemies.gameObjects);
 
         this.runActionForCollisions(collisions, this.onEnemyHit);
     }

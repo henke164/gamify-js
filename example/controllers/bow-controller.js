@@ -1,4 +1,4 @@
-class BowActor {
+class BowController {
     constructor(onShoot) {
         this.onShoot = onShoot;
         this.startPullLocation = Vector2.zero;

@@ -8,7 +8,7 @@ class AbilityTreeScene {
         this.backButton = new Button();
         this.backButton.text = 'Back';
         this.backButton.onClick = () => {
-            game.setMenuScene();
+            game.openMenu();
         };
     }
 

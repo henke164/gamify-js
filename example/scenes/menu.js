@@ -1,10 +1,11 @@
 class MenuScene {
     constructor(game) {
+        this.level = 10;
         this.background = new Texture2D('images/background.png', Game.screenSize.width, Game.screenSize.height);
         this.startButton = new Button();
         this.startButton.text = 'Start Game';
         this.startButton.onClick = () => {
-            game.setInGameScene();
+            game.startGame(this.level);
         };
 
         this.talentButton = new Button();
