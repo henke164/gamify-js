@@ -6,8 +6,8 @@ class MultiShotAbility
     }
 
     onShoot() {
-        var bowActor = this.game.bowActor;
-        var mainArrow = bowActor.arrow;
+        var bowController = this.game.bowController;
+        var mainArrow = bowController.arrow;
         var angle = this.level * 3;
 
         if (angle > 45 / this.level) {
@@ -15,28 +15,28 @@ class MultiShotAbility
         }
 
         var rotation = mainArrow.rotation + angle;
-        var dist = Vector2.distance(bowActor.startPullLocation, bowActor.bow.position);
+        var dist = Vector2.distance(bowController.startPullLocation, bowController.bow.position);
         for(var x = 0; x < Math.floor(this.level / 2); x++) {
-            var targetLocation = this.getTargetLocation(bowActor.bow.position, rotation, dist);
+            var targetLocation = this.getTargetLocation(bowController.bow.position, rotation, dist);
             this.shootClonedArrowTowardsDirection(targetLocation);
             rotation += angle;
         }
 
         rotation = mainArrow.rotation - angle;
         for(var x = 0; x < this.level / 2; x++) {
-            var targetLocation = this.getTargetLocation(bowActor.bow.position, rotation, dist);
+            var targetLocation = this.getTargetLocation(bowController.bow.position, rotation, dist);
             this.shootClonedArrowTowardsDirection(targetLocation);
             rotation -= angle;
         }
     }
 
     shootClonedArrowTowardsDirection(targetLocation) {
-        var bowActor = this.game.bowActor;
-        var mainArrow = bowActor.arrow;
-        var arrow = bowActor.arrows.addGameObject(Arrow);
+        var bowController = this.game.bowController;
+        var mainArrow = bowController.arrow;
+        var arrow = bowController.arrows.addGameObject(Arrow);
         arrow.power = mainArrow.power / 2;
         arrow.position = new Vector2(mainArrow.position.x, mainArrow.position.y);
-        arrow.speed = 10 + (bowActor.pullDistance / 10);
+        arrow.speed = 10 + (bowController.pullDistance / 10);
         arrow.faceTowards(targetLocation, TEXTURECORNER.TOP);
         arrow.velocity = Vector2.direction(mainArrow.position, targetLocation);
     }
