@@ -6,8 +6,8 @@ class SpeedIncreaseAbility
     }
 
     onShoot() {
-        var bowActor = this.game.bowActor;
-        bowActor.arrow.speed = (10 * (1 + (0.1 * this.level)) + (bowActor.pullDistance / 10));
+        var bowController = this.game.bowController;
+        bowController.arrow.speed = (10 * (1 + (0.1 * this.level)) + (bowController.pullDistance / 10));
     }
 
     onEnemyHit(arrow, enemy) {}

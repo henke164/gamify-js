@@ -1,10 +1,11 @@
-class AbilityController
+class DamagingController
 {
     constructor(game) {
         this.game = game;
         this.initializeAbilities();
         this.onEnemyHit = this.onEnemyHit.bind(this);
         this.onShoot = this.onShoot.bind(this);
+        this.damageLabels = [];
     }
 
     initializeAbilities() {
@@ -27,6 +28,13 @@ class AbilityController
 
     update() {
         this.handleArrowAndEnemyCollisions();
+
+        var idx = this.damageLabels.length
+        while(idx--) {
+            if(this.animateDamageLabel(this.damageLabels[idx])) {
+                this.damageLabels.splice(idx, 1);
+            }
+        }
     }
 
     handleArrowAndEnemyCollisions() {
@@ -46,6 +54,23 @@ class AbilityController
     onEnemyHit(arrow, enemy) {
         for (var x = 0; x < this.abilities.length; x++) {
             this.abilities[x].onEnemyHit(arrow, enemy);
+        }
+
+        var label = new Label('500', new Vector2(arrow.position.x, arrow.position.y), '', '14px Arial');
+        label.opacity = 1;
+        this.animateDamageLabel(label);
+        this.damageLabels.push(label);
+    }
+
+    animateDamageLabel(label) {
+        label.fontColor = 'rgba(255, 255, 255, ' + (label.opacity -= 0.02) + ')';
+        label.position.y -= 1;
+        return label.opacity < 0;
+    }
+
+    render(spriteBatch) {
+        for(var x = 0; x < this.damageLabels.length; x++) {
+            this.damageLabels[x].render(spriteBatch);
         }
     }
 }

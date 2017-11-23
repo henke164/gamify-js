@@ -2,8 +2,8 @@ class InGameScene {
     constructor(game, level, onGameWon, onGameLost) {
         this.enemyCount = 5;
         this.enemyController = new EnemyController(level, this.enemyCount, this.onPlayerAttacked.bind(this));
-        this.abilityController = new AbilityController(this);
-        this.bowController = new BowController(this.abilityController.onShoot);
+        this.damagingController = new DamagingController(this);
+        this.bowController = new BowController(this.damagingController.onShoot);
         this.background = new Texture2D('images/background.png', Game.screenSize.width, Game.screenSize.height);
         this.health = Player.baseStats.health;
 
@@ -18,11 +18,12 @@ class InGameScene {
     update() {
         this.bowController.update();
         this.enemyController.update();
-        this.abilityController.update();
+        this.damagingController.update();
     }
 
     render(spriteBatch) {
         spriteBatch.drawTexture(this.background, Vector2.zero);
+        this.damagingController.render(spriteBatch);
 
         if (this.enemyController.enemiesDestroyed == this.enemyCount) {
             this.renderGameWon(spriteBatch);
