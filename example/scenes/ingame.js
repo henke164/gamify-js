@@ -1,6 +1,6 @@
 class InGameScene {
     constructor(game, level, onGameWon, onGameLost) {
-        this.enemyCount = 5;
+        this.enemyCount = 10;
         this.enemyController = new EnemyController(level, this.enemyCount, this.onPlayerAttacked.bind(this));
         this.damagingController = new DamagingController(this);
         this.bowController = new BowController(this.damagingController.onShoot);

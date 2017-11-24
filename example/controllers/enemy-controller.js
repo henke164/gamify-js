@@ -30,7 +30,7 @@ class EnemyController {
         monster.position = new Vector2(rnd, 0);
         monster.velocity = new Vector2(0, 1)
         monster.speed = 4;
-        monster.setHealth(this.statsProvider.getBaseValue());
+        monster.setHealth(this.statsProvider.getBaseValue() * 5);
         monster.onDestroyed = () => {
             this.enemiesDestroyed++;
         };

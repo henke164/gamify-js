@@ -53,10 +53,13 @@ class DamagingController
 
     onEnemyHit(arrow, enemy) {
         for (var x = 0; x < this.abilities.length; x++) {
-            this.abilities[x].onEnemyHit(arrow, enemy);
+            var t = this;
+            this.abilities[x].onEnemyHit(arrow, enemy, this.addDamageLabel.bind(this));
         }
+    }
 
-        var label = new Label('500', new Vector2(arrow.position.x, arrow.position.y), '', '14px Arial');
+    addDamageLabel(amount, position) {
+        var label = new Label(amount, position, '', '14px Arial');
         label.opacity = 1;
         this.animateDamageLabel(label);
         this.damageLabels.push(label);

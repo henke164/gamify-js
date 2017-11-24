@@ -35,9 +35,9 @@ class MultiShotAbility
         var mainArrow = bowController.arrow;
         var arrow = bowController.arrows.addGameObject(Arrow);
         arrow.power = mainArrow.power / 2;
-        arrow.position = new Vector2(mainArrow.position.x, mainArrow.position.y);
+        arrow.position = mainArrow.position.clone();
         arrow.speed = mainArrow.speed
-        
+
         arrow.faceTowards(targetLocation, TEXTURECORNER.TOP);
         arrow.velocity = Vector2.direction(mainArrow.position, targetLocation);
     }

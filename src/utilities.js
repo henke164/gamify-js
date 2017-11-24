@@ -10,6 +10,10 @@ class Vector2 {
         this.y = this.y / length;
     }
 
+    clone() {
+        return new Vector2(this.x, this.y);
+    }
+
     static direction(v1, v2) {
         var direction = new Vector2(v2.x - v1.x, v2.y - v1.y);
         direction.normalize();

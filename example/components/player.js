@@ -3,10 +3,13 @@ var Player = {
         health: 2
     },
     abilities:[{
-        type: SpeedIncreaseAbility,
-        level: 0
-    }, {
-        type: MultiShotAbility,
-        level: 10
+            type: SpeedIncreaseAbility,
+            level: 0
+        }, {
+            type: MultiShotAbility,
+            level: 0
+        }, {
+            type: FireDotAbility,
+            level: 1
     }]
 }
