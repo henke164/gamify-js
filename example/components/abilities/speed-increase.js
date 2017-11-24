@@ -1,16 +1,13 @@
-class SpeedIncreaseAbility
+class SpeedIncreaseAbility extends BaseAbility
 {
     constructor(game, level) {
-        this.game = game;
-        this.level = level;
+        super(game, level);
     }
 
     onShoot() {
         var bowController = this.game.bowController;
         bowController.arrow.speed = (10 * (1 + (0.1 * this.level)) + (bowController.pullDistance / 10));
     }
-
-    onEnemyHit(arrow, enemy) {}
 }
 
 SpeedIncreaseAbility.icon = new Texture2D('images/abilities/speed-increase.png', 80);

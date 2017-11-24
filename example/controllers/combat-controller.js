@@ -1,4 +1,4 @@
-class DamagingController
+class CombatController
 {
     constructor(game) {
         this.game = game;
@@ -6,6 +6,7 @@ class DamagingController
         this.onEnemyHit = this.onEnemyHit.bind(this);
         this.onShoot = this.onShoot.bind(this);
         this.damageLabels = [];
+        this.enemiesDestroyed = 0;
     }
 
     initializeAbilities() {
@@ -56,17 +57,26 @@ class DamagingController
             var t = this;
             this.abilities[x].onEnemyHit(arrow, enemy, this.addDamageLabel.bind(this));
         }
+
+        if (enemy.shouldDestroy) {
+            this.onEnemyKilled();
+        }
     }
 
-    addDamageLabel(amount, position) {
+    onEnemyKilled() {
+        this.enemiesDestroyed++;
+    }
+
+    addDamageLabel(amount, position, color = { r: 255, b: 255, g: 255 }) {
         var label = new Label(amount, position, '', '14px Arial');
         label.opacity = 1;
+        label.color = color;
         this.animateDamageLabel(label);
         this.damageLabels.push(label);
     }
 
     animateDamageLabel(label) {
-        label.fontColor = 'rgba(255, 255, 255, ' + (label.opacity -= 0.02) + ')';
+        label.fontColor = 'rgba(' + label.color.r + ', ' + label.color.g + ', ' + label.color.b + ', ' + (label.opacity -= 0.02) + ')';
         label.position.y -= 1;
         return label.opacity < 0;
     }

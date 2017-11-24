@@ -1,13 +1,14 @@
-class FireDotAbility
+class FireDotAbility extends BaseAbility
 {
     constructor(game, level) {
-        this.game = game;
-        this.level = level;
+        super(game, level);
     }
 
-    onShoot() {}
-
     onEnemyHit(arrow, enemy, renderDamageLabel) {
+        if (this.arrowAlreadyHitEnemy(arrow, enemy)) {
+            return;
+        }
+
         var burnPower = Math.round((arrow.speed * arrow.power) * (0.1 * this.level));
 
         var ticks = 0;
@@ -17,7 +18,7 @@ class FireDotAbility
                 return;
             }
             enemy.reduceHealth(burnPower);
-            renderDamageLabel(burnPower, enemy.position.clone());
+            renderDamageLabel(burnPower, enemy.position.clone(), { r:255, g:255, b:0 });
             ticks++;
             if(ticks == 6) {
                 clearInterval(burnInterval);

@@ -5,7 +5,6 @@ class GameObject {
         this.velocity = new Vector2(0, 0);
         this.position = new Vector2(0, 0);
         this.shouldDestroy = false;
-        this.onDestroyed = undefined;
     }
 
     update() {
@@ -27,10 +26,6 @@ class GameObject {
 
     destroy() {
         this.shouldDestroy = true;
-
-        if(this.onDestroyed) {
-            this.onDestroyed();
-        }
     }
 
     render(spriteBatch) {}

@@ -4,17 +4,13 @@ class EnemyController {
         this.enemies = new GameObjectArray();
         this.ticksUntilNextSpawn = 0;
         this.level = level;
-        this.enemyCount = enemyCount;
-        this.wave = 0;
-        this.enemiesDestroyed = 0;
         this.onPlayerAttacked = onPlayerAttacked;
     }
 
     update() {
-        if (this.ticksUntilNextSpawn <= 0 && this.enemyCount > this.wave) {
+        if (this.ticksUntilNextSpawn <= 0) {
             this.spawnMonster();
             this.ticksUntilNextSpawn = this.statsProvider.getRandomDecreasingNumber(10);
-            this.wave++;
         }
         this.ticksUntilNextSpawn--;
         this.enemies.updateAll();
@@ -31,9 +27,6 @@ class EnemyController {
         monster.velocity = new Vector2(0, 1)
         monster.speed = 4;
         monster.setHealth(this.statsProvider.getBaseValue() * 5);
-        monster.onDestroyed = () => {
-            this.enemiesDestroyed++;
-        };
         monster.onAttack = () => {
             this.onPlayerAttacked();
         }

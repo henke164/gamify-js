@@ -1,7 +1,7 @@
-class DefaultAbility
+class DefaultAbility extends BaseAbility
 {
     constructor(game) {
-        this.game = game;
+        super(game, 0);
     }
 
     onShoot() {
@@ -17,11 +17,21 @@ class DefaultAbility
     }
 
     onEnemyHit(arrow, enemy, renderDamageLabel) {
+        if (this.arrowAlreadyHitEnemy(arrow, enemy)) {
+            return;
+        }
+
         enemy.reduceHealth(arrow.speed * arrow.power);
         renderDamageLabel(Math.round(arrow.speed * arrow.power), arrow.position.clone());
 
         if (arrow.destroyOnImpact) {
             arrow.shouldDestroy = true;
+        }
+
+        if (!arrow.hits) {
+            arrow.hits = [enemy];
+        } else {
+            arrow.hits.push(enemy);
         }
     }
 }

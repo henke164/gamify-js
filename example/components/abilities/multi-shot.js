@@ -1,8 +1,7 @@
-class MultiShotAbility
+class MultiShotAbility extends BaseAbility
 {
     constructor(game, level) {
-        this.game = game;
-        this.level = level;
+        super(game, level);
     }
 
     onShoot() {
@@ -53,8 +52,6 @@ class MultiShotAbility
             position.x - (hlen * -Math.sin(Math.PI * val / 180)),
             position.y - (hlen * Math.cos(Math.PI * val / 180)));
     }
-
-    onEnemyHit(arrow, enemy) {}
 }
 
 MultiShotAbility.icon = new Texture2D('images/abilities/blizzard.png', 80);
