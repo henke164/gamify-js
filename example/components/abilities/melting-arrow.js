@@ -19,12 +19,14 @@ class MeltingArrowAbility extends BaseAbility
         if (arrow.piercings <= 0) {
             arrow.shouldDestroy = true;
         }
+
+
         arrow.piercings--;
     }
 }
 
-MeltingArrowAbility.icon = new Texture2D('images/abilities/fire.png', 80);
+MeltingArrowAbility.icon = new Texture2D('images/abilities/melting.png', 80);
 
 MeltingArrowAbility.spellName = 'Melting arrow';
 
-MeltingArrowAbility.description = ['Will pierce trough 1 enemy per level.'];
+MeltingArrowAbility.description = ['Your main arrow will pierce trough 1 enemy per level. And deal 100% extra damage per level.'];

@@ -6,13 +6,16 @@ var Player = {
         type: SpeedIncreaseAbility,
         level: 0
     }, {
-        type: MultiShotAbility,
-        level: 0
-    }, {
         type: FireDotAbility,
         level: 1
     }, {
         type: MeltingArrowAbility,
-        level: 5
+        level: 10
+    }, {
+        type: FrostArrowAbility,
+        level: 10
+    }, {
+        type: MultiShotAbility,
+        level: 10
     }]
 }
