@@ -43,7 +43,7 @@ class AbilityTreeScene {
         spriteBatch.drawText('0/10', new Vector2(365, 145), "12px Arial", 'white');
 
         spriteBatch.drawTexture(HealthIncreaseAbility.icon, new Vector2(50, 200));
-        spriteBatch.drawTexture(MultiShotAbility.icon, new Vector2(190, 200));
+        spriteBatch.drawTexture(MeltingArrowAbility.icon, new Vector2(190, 200));
         spriteBatch.drawTexture(MultiShotAbility.icon, new Vector2(340, 200));
 
         spriteBatch.drawText('0/10', new Vector2(75, 295), "12px Arial", 'white');
