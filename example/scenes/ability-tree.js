@@ -36,7 +36,7 @@ class AbilityTreeScene {
     renderGeneralTree(spriteBatch) {
         spriteBatch.drawTexture(SpeedIncreaseAbility.icon, new Vector2(50, 50));
         spriteBatch.drawTexture(FireDotAbility.icon, new Vector2(190, 50));
-        spriteBatch.drawTexture(MultiShotAbility.icon, new Vector2(340, 50));
+        spriteBatch.drawTexture(FrostArrowAbility.icon, new Vector2(340, 50));
 
         spriteBatch.drawText('0/10', new Vector2(75, 145), "12px Arial", 'white');
         spriteBatch.drawText('0/10', new Vector2(215, 145), "12px Arial", 'white');
@@ -44,7 +44,7 @@ class AbilityTreeScene {
 
         spriteBatch.drawTexture(HealthIncreaseAbility.icon, new Vector2(50, 200));
         spriteBatch.drawTexture(MeltingArrowAbility.icon, new Vector2(190, 200));
-        spriteBatch.drawTexture(MultiShotAbility.icon, new Vector2(340, 200));
+        spriteBatch.drawTexture(FreezingArrowAbility.icon, new Vector2(340, 200));
 
         spriteBatch.drawText('0/10', new Vector2(75, 295), "12px Arial", 'white');
         spriteBatch.drawText('0/10', new Vector2(215, 295), "12px Arial", 'white');

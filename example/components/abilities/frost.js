@@ -16,18 +16,22 @@ class FrostArrowAbility extends BaseAbility
         if (enemy.slowDownTimeout) {
             clearTimeout(enemy.slowDownTimeout);
         }
+        
+        if (enemy.speed == 0) {
+            return;
+        }
 
         enemy.speed = enemy.originalSpeed * (0.60 - (0.05 * this.level));
         enemy.slowDownTimeout = setTimeout(function() {
             enemy.speed = enemy.originalSpeed;
             clearTimeout(enemy.slowDownTimeout);
             enemy.slowDownTimeout = null;
-        }, 1000 + (500 * this.level));
+        }, 1000 + (200 * this.level));
     }
 }
 
-MeltingArrowAbility.icon = new Texture2D('images/abilities/melting.png', 80);
+FrostArrowAbility.icon = new Texture2D('images/abilities/frost.png', 80);
 
-MeltingArrowAbility.spellName = 'Melting arrow';
+FrostArrowAbility.spellName = 'Frost arrow';
 
-MeltingArrowAbility.description = ['Will pierce trough 1 enemy per level.'];
+FrostArrowAbility.description = ['Slow down enemy by 20% for 1 second + 0.2 seconds per level.'];

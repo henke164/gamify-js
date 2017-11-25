@@ -33,7 +33,7 @@ class MultiShotAbility extends BaseAbility
         var bowController = this.game.bowController;
         var mainArrow = bowController.arrow;
         var arrow = bowController.arrows.addGameObject(FrostArrow);
-        arrow.power = (arrow.speed * arrow.power) / 2;
+        arrow.power = mainArrow.power / 4;
         arrow.position = mainArrow.position.clone();
         arrow.speed = mainArrow.speed
 
@@ -58,4 +58,4 @@ MultiShotAbility.icon = new Texture2D('images/abilities/blizzard.png', 80);
 
 MultiShotAbility.spellName = 'Blizzard';
 
-MultiShotAbility.description = ['Fires 1 additional frost arrow per level', 'that deals 50% of the main arrow', 'damage.'];
+MultiShotAbility.description = ['Fires 1 additional frost arrow per level', 'that deals 25% of the main arrow', 'damage.'];

@@ -1,6 +1,6 @@
 class MenuScene {
     constructor(game) {
-        this.level = 60;
+        this.level = 1;
         this.background = new Texture2D('images/background.png', Game.screenSize.width, Game.screenSize.height);
         this.startButton = new Button();
         this.startButton.text = 'Start Game';

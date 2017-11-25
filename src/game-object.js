@@ -1,7 +1,7 @@
 class GameObject {
     constructor() {
         this.rotation = 0;
-        this.speed = 1;
+        this.speed = 0;
         this.velocity = new Vector2(0, 0);
         this.position = new Vector2(0, 0);
         this.shouldDestroy = false;

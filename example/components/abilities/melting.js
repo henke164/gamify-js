@@ -16,9 +16,11 @@ class MeltingArrowAbility extends BaseAbility
             return;
         }
         
-        var damage = Math.round(arrow.speed * arrow.power * 2);
-        enemy.reduceHealth(damage);
-        renderDamageLabel(damage, new Vector2(arrow.position.x, arrow.position.y + 10), { r:255, g:255, b:0 });
+        if(arrow.speed > 40) {
+            var damage = Math.round(arrow.speed * arrow.power * 2);
+            enemy.reduceHealth(damage);
+            renderDamageLabel(damage, new Vector2(arrow.position.x, arrow.position.y + 10), { r:255, g:255, b:0 });
+        }
 
         if (arrow.piercings <= 0) {
             arrow.shouldDestroy = true;

@@ -5,6 +5,7 @@ class Monster extends Sprite {
         this.animator = new EnemyAnimator(this);
         this.texture = this.animator.idleAnimation[0];
         this.onAttack = () => {};
+        this.frozen = false;
     }
 
     setHealth(health) {
@@ -23,7 +24,7 @@ class Monster extends Sprite {
 
         super.update();
     }
-
+    
     reduceHealth(amount) {
         if (this.shouldDestroy) {
             return;

@@ -15,7 +15,9 @@ class CombatController
         for(var x = 0; x < Player.abilities.length; x++) {
             var ability = Player.abilities[x].type;
             var level = Player.abilities[x].level;
-            this.abilities.push(new ability(this.game, level));
+            if (level > 0) {
+                this.abilities.push(new ability(this.game, level));
+            }
         }
 
         this.abilities.push(new DefaultAbility(this.game));

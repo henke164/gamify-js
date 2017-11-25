@@ -1,22 +1,25 @@
 var Player = {
     baseStats: {
-        health: 2000,
-        basePower: 500
+        health: 5,
+        basePower: 5
     },
     abilities:[{
         type: SpeedIncreaseAbility,
-        level: 5
+        level: 0
     }, {
         type: FireDotAbility,
-        level: 1
+        level: 0
     }, {
         type: MeltingArrowAbility,
-        level: 10
+        level: 0
+    }, {
+        type: FreezingArrowAbility,
+        level: 0,
     }, {
         type: FrostArrowAbility,
-        level: 10
+        level: 0
     }, {
         type: MultiShotAbility,
-        level: 10
+        level: 0
     }]
 }

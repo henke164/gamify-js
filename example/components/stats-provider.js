@@ -9,7 +9,6 @@ class StatsProvider {
 
     getRandomDecreasingNumber(minValue) {
         var value = (90 + (Math.random() * 10)) - (this.getBaseValue() / 5);
-        console.log(this.getBaseValue());
         return value > minValue ? value : minValue;
     }
 }
