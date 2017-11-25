@@ -32,8 +32,8 @@ class MultiShotAbility extends BaseAbility
     shootClonedArrowTowardsDirection(targetLocation) {
         var bowController = this.game.bowController;
         var mainArrow = bowController.arrow;
-        var arrow = bowController.arrows.addGameObject(Arrow);
-        arrow.power = mainArrow.power / 2;
+        var arrow = bowController.arrows.addGameObject(FrostArrow);
+        arrow.power = (arrow.speed * arrow.power) / 2;
         arrow.position = mainArrow.position.clone();
         arrow.speed = mainArrow.speed
 

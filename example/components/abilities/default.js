@@ -21,8 +21,9 @@ class DefaultAbility extends BaseAbility
             return;
         }
 
-        enemy.reduceHealth(arrow.speed * arrow.power);
-        renderDamageLabel(Math.round(arrow.speed * arrow.power), arrow.position.clone());
+        var damage = arrow.speed * arrow.power;
+        enemy.reduceHealth(damage);
+        renderDamageLabel(Math.round(damage), arrow.position.clone());
 
         if (arrow.destroyOnImpact) {
             arrow.shouldDestroy = true;

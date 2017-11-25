@@ -1,13 +1,14 @@
 var Player = {
     baseStats: {
-        health: 2000
+        health: 2000,
+        basePower: 500
     },
     abilities:[{
         type: SpeedIncreaseAbility,
-        level: 0
+        level: 5
     }, {
         type: MultiShotAbility,
-        level: 0
+        level: 5
     }, {
         type: FireDotAbility,
         level: 1
