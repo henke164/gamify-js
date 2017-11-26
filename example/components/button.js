@@ -1,6 +1,6 @@
 class Button extends Sprite {
-    constructor() {
-        super(new Texture2D('images/button.png', 220, 75));
+    constructor(texture = new Texture2D('images/button.png', 220, 75)) {
+        super(texture);
         this.text = '';
         this.onClick = () => {};
         this.font = '30px Arial';
