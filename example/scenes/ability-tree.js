@@ -2,7 +2,7 @@ class AbilityTreeScene {
     constructor(game) {
         this.background = new Texture2D('images/background.png', Game.screenSize.width, Game.screenSize.height);
         this.panel = new Texture2D('images/panel.png', Game.screenSize.width);
-
+        this.abilityHandler = new AbilityHandler();
         this.selectedAbility = null;
 
         this.backButton = new Button();
@@ -11,30 +11,40 @@ class AbilityTreeScene {
             game.openMenu();
         };
 
+        this.initializeAbilityTree();
+    }
+
+    initializeAbilityTree() {
         this.abilityTree = [{
             ability: SpeedIncreaseAbility,
             position: new Vector2(50, 50),
-            button: new Button(SpeedIncreaseAbility.icon)
+            button: new Button(SpeedIncreaseAbility.icon),
+            level: this.abilityHandler.getAbility(SpeedIncreaseAbility).level
         },{
             ability: FireDotAbility,
             position: new Vector2(190, 50),
-            button: new Button(FireDotAbility.icon)
+            button: new Button(FireDotAbility.icon),
+            level: this.abilityHandler.getAbility(FireDotAbility).level
         },{
             ability: FrostArrowAbility,
             position: new Vector2(340, 50),
-            button: new Button(FrostArrowAbility.icon)
+            button: new Button(FrostArrowAbility.icon),
+            level: this.abilityHandler.getAbility(FrostArrowAbility).level
         },{
             ability: HealthIncreaseAbility,
             position: new Vector2(50, 200),
-            button: new Button(HealthIncreaseAbility.icon)
+            button: new Button(HealthIncreaseAbility.icon),
+            level: this.abilityHandler.getAbility(HealthIncreaseAbility).level
         },{
             ability: MeltingArrowAbility,
             position: new Vector2(190, 200),
-            button: new Button(MeltingArrowAbility.icon)
+            button: new Button(MeltingArrowAbility.icon),
+            level: this.abilityHandler.getAbility(MeltingArrowAbility).level
         },{
-            ability: MeltingArrowAbility,
+            ability: FreezingArrowAbility,
             position: new Vector2(340, 200),
-            button: new Button(MeltingArrowAbility.icon)
+            button: new Button(FreezingArrowAbility.icon),
+            level: this.abilityHandler.getAbility(FreezingArrowAbility).level
         },/*{
             ability: SpeedIncreaseAbility,
             rectangle: new Rectangle(50, 350, 80, 80)
@@ -44,8 +54,18 @@ class AbilityTreeScene {
         },*/{
             ability: MultiShotAbility,
             position: new Vector2(340, 350),
-            button: new Button(MeltingArrowAbility.icon)
+            button: new Button(MultiShotAbility.icon),
+            level: this.abilityHandler.getAbility(MultiShotAbility).level
         }];
+
+        var parent = this;
+        for (var x = 0; x < this.abilityTree.length; x++) {
+            var ability = this.abilityTree[x];
+            ability.button.onClick = function() {
+                parent.abilityHandler.increaseAbilityLevel(this.ability);
+                parent.initializeAbilityTree();
+            }.bind(ability);
+        }
     }
 
     update() {
@@ -75,13 +95,11 @@ class AbilityTreeScene {
 
     renderGeneralTree(spriteBatch) {
         for(var x = 0; x < this.abilityTree.length; x++) {
-            var a = this.abilityTree[x];
-            a.button.position = a.position;
-            a.button.render(spriteBatch);
-            a.button.onClick = () => {
-                console.log(a.ability.spellName);
-            };
-            spriteBatch.drawText('0/10', new Vector2(a.position.x + 25, a.position.y + 95), "12px Arial", 'white');
+            var ability = this.abilityTree[x];
+            ability.button.position = ability.position;
+            ability.button.render(spriteBatch);
+            spriteBatch.drawText(ability.level + '/10', new Vector2(ability.position.x + 25,
+                ability.position.y + 95), "12px Arial", 'white');
         }
     }
 

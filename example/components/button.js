@@ -12,7 +12,6 @@ class Button extends Sprite {
         var rectangle = new Rectangle(this.position.x, this.position.y, this.texture.width, this.texture.height);
 
         var mouseState = Game.input.mouseState;
-
         if (mouseState.leftButtonDown && !this.mouseDown) {
             this.mouseDown = true;
         }
