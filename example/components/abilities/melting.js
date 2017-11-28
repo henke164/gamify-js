@@ -15,7 +15,7 @@ class MeltingArrowAbility extends BaseAbility
         if (this.arrowAlreadyHitEnemy(arrow, enemy)) {
             return;
         }
-        
+
         if(arrow.speed > 40) {
             var damage = Math.round(arrow.speed * arrow.power * 2);
             enemy.reduceHealth(damage);
@@ -35,4 +35,4 @@ MeltingArrowAbility.icon = new Texture2D('images/abilities/melting.png', 80);
 
 MeltingArrowAbility.spellName = 'Melting arrow';
 
-MeltingArrowAbility.description = ['Main arrow pierce trough 1 enemy per level and deal additional 200% damage.'];
+MeltingArrowAbility.description = ['Main arrow pierce trough 1 enemy per level and', 'deal additional 200% damage.'];

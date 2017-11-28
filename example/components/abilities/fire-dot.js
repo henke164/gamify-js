@@ -10,7 +10,6 @@ class FireDotAbility extends BaseAbility
         }
 
         var burnPower = Math.round((arrow.speed * arrow.power) * (0.1 * this.level));
-
         enemy.burnTicks = 0;
         if (enemy.burnInterval) {
             enemy.burnTicks = 0;

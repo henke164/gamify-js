@@ -12,7 +12,7 @@ class Input {
 
     bindMouseEvents(canvas) {
         canvas.addEventListener('mousemove', (evt) => {
-            this.mouseState.position = new Vector2(evt.layerX, evt.layerY);
+            this.mouseState.position = new Vector2(evt.offsetX, evt.offsetY);
         });
 
         canvas.addEventListener('mousedown', (evt) => {

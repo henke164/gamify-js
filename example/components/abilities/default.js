@@ -24,15 +24,5 @@ class DefaultAbility extends BaseAbility
         var damage = arrow.speed * arrow.power;
         enemy.reduceHealth(damage);
         renderDamageLabel(Math.round(damage), arrow.position.clone());
-
-        if (arrow.destroyOnImpact) {
-            arrow.shouldDestroy = true;
-        }
-
-        if (!arrow.hits) {
-            arrow.hits = [enemy];
-        } else {
-            arrow.hits.push(enemy);
-        }
     }
 }

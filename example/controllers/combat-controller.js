@@ -12,6 +12,7 @@ class CombatController
     initializeAbilities() {
         this.abilities = [];
 
+        console.log(Player.abilities);
         for(var x = 0; x < Player.abilities.length; x++) {
             var ability = Player.abilities[x].type;
             var level = Player.abilities[x].level;
@@ -58,6 +59,16 @@ class CombatController
         for (var x = 0; x < this.abilities.length; x++) {
             var t = this;
             this.abilities[x].onEnemyHit(arrow, enemy, this.addDamageLabel.bind(this));
+        }
+
+        if (arrow.destroyOnImpact) {
+            arrow.shouldDestroy = true;
+        }
+
+        if (!arrow.hits) {
+            arrow.hits = [enemy];
+        } else {
+            arrow.hits.push(enemy);
         }
 
         if (enemy.shouldDestroy) {

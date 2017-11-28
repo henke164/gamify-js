@@ -16,7 +16,7 @@ class FrostArrowAbility extends BaseAbility
         if (enemy.slowDownTimeout) {
             clearTimeout(enemy.slowDownTimeout);
         }
-        
+
         if (enemy.speed == 0) {
             return;
         }
@@ -34,4 +34,4 @@ FrostArrowAbility.icon = new Texture2D('images/abilities/frost.png', 80);
 
 FrostArrowAbility.spellName = 'Frost arrow';
 
-FrostArrowAbility.description = ['Slow down enemy by 20% for 1 second + 0.2 seconds per level.'];
+FrostArrowAbility.description = ['Slow down enemy by 20% for 1 second + 0.2 seconds', 'per level.'];

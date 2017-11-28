@@ -30,7 +30,7 @@ class FreezingArrowAbility extends BaseAbility
         if (enemy.stunTimeout) {
             clearTimeout(enemy.stunTimeout);
         }
-        
+
         enemy.speed = 0;
         enemy.stunTimeout = setTimeout(function() {
             enemy.speed = enemy.originalSpeed;
@@ -44,4 +44,4 @@ FreezingArrowAbility.icon = new Texture2D('images/abilities/freeze.png', 80);
 
 FreezingArrowAbility.spellName = 'Freezing arrow';
 
-FreezingArrowAbility.description = ['Main arrow has a 50% chance to freeze enemy (0.5 sec per level).'];
+FreezingArrowAbility.description = ['Main arrow has a 50% chance to freeze the enemy', 'for 0.5 sec per level.'];

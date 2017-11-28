@@ -5,11 +5,14 @@ class AbilityHandler {
 
     loadAbilities() {
         Player.abilities = [{
+            type: DefaultAbility,
+            level: 99
+        }, {
             type: SpeedIncreaseAbility,
             level: 0
         }, {
             type: FireDotAbility,
-            level: 0
+            level: 3
         }, {
             type: MeltingArrowAbility,
             level: 0
@@ -30,15 +33,26 @@ class AbilityHandler {
 
     increaseAbilityLevel(abilityType) {
         var ability = this.getAbility(abilityType);
+
         if (!ability) {
-            return;
+            return 'Ability could not be found.';
         }
 
         if (ability.level >= 10) {
-            return;
+            return 'Max level reached.';
         }
+
+        var cost = ability.level;
+
+        if (cost > Player.abilityPoints) {
+            return 'Not enough points.';
+        }
+
+        Player.abilityPoints -= cost;
+
         ability.level++;
-        console.log(ability);
+
+        return 'Successfully upgraded ' + abilityType.spellName + ' to level ' + ability.level;
     }
 
     getAbility(abilityType) {
