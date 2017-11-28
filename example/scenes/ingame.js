@@ -1,8 +1,8 @@
 class InGameScene {
-    constructor(game, level, onGameWon, onGameLost) {
-        this.enemyCount = 10 * level;
-        this.health = Player.baseStats.health;
-        this.enemyController = new EnemyController(level, this.enemyCount, this.onPlayerAttacked.bind(this));
+    constructor(game, difficulty, onGameWon, onGameLost) {
+        this.enemyCount = 5 * difficulty;
+        this.health = Player.getHealth();
+        this.enemyController = new EnemyController(difficulty, this.enemyCount, this.onPlayerAttacked.bind(this));
         this.combatController = new CombatController(this);
         this.bowController = new BowController(this.combatController.onShoot);
         this.background = new Texture2D('images/background.png', Game.screenSize.width, Game.screenSize.height);

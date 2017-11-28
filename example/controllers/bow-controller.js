@@ -32,7 +32,7 @@ class BowController {
 
     startPulling() {
         this.arrow = this.arrows.addGameObject(Arrow);
-        this.arrow.power = Player.baseStats.basePower;
+        this.arrow.power = Player.getPower();
         this.arrow.position = new Vector2(this.bow.position.x, this.bow.position.y - 8.5);
         this.arrow.faceTowards(this.startPullLocation, TEXTURECORNER.TOP);
     }

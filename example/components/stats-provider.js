@@ -4,7 +4,7 @@ class StatsProvider {
     }
 
     getBaseValue() {
-        return Math.round((4 * (this.level * (3 * 3))) / 5);
+        return this.level + Math.exp(this.level * 0.01);
     }
 
     getRandomDecreasingNumber(minValue) {

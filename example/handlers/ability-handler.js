@@ -12,7 +12,7 @@ class AbilityHandler {
             level: 0
         }, {
             type: FireDotAbility,
-            level: 3
+            level: 0
         }, {
             type: MeltingArrowAbility,
             level: 0
