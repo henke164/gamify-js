@@ -15,7 +15,6 @@ class AbilityTreeScene {
         this.backToTreeButton = new Button();
         this.backToTreeButton.text = 'Back';
         this.backToTreeButton.onClick = () => {
-            console.log(Player.abilities);
             this.selectedAbility = null;
         };
 
