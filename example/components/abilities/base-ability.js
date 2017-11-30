@@ -9,8 +9,4 @@ class BaseAbility {
     onEnemyHit(arrow, enemy, renderDamageLabel) {}
 
     onGameWon() {}
-
-    arrowAlreadyHitEnemy(arrow, enemy) {
-        return arrow.hits && arrow.hits.indexOf(enemy) > -1;
-    }
 }

@@ -1,33 +1,36 @@
 class EnemyController {
     constructor(difficulty, enemyCount, onPlayerAttacked) {
-        this.statsProvider = new StatsProvider(difficulty);
+        this.difficulty = difficulty;
         this.enemies = new GameObjectArray();
         this.ticksUntilNextSpawn = 0;
         this.onPlayerAttacked = onPlayerAttacked;
-        this.setSpawnTime(enemyCount);
+        this.enemyCount = enemyCount;
+        this.setSpawnTime();
     }
 
-    setSpawnTime(totalCount) {
+    setSpawnTime() {
         var fps = 30;
         var halfMinuteInSeconds = 30;
 
-        this.spawnTime = ((fps * halfMinuteInSeconds) / totalCount);
+        this.spawnTime = ((fps * halfMinuteInSeconds) / this.enemyCount);
 
-        var fiveSeconds = fps * 5;
-        if (this.spawnTime > fiveSeconds) {
-            this.spawnTime = fiveSeconds;
+        var twoSeconds = fps * 2;
+        if (this.spawnTime > twoSeconds) {
+            this.spawnTime = twoSeconds;
         }
+
         this.timer = 0;
     }
+
     update() {
-        if (this.ticksUntilNextSpawn <= 0) {
+        if (this.ticksUntilNextSpawn <= 0 && this.enemyCount > 0) {
             this.spawnEnemy();
             this.ticksUntilNextSpawn = this.spawnTime;
         }
+
         this.ticksUntilNextSpawn--;
         this.timer ++;
         if(this.timer >= 30) {
-            console.log('time');
             this.timer = 0;
         }
         this.enemies.updateAll();
@@ -43,10 +46,11 @@ class EnemyController {
         monster.position = new Vector2(rnd, 0);
         monster.velocity = new Vector2(0, 1)
         monster.speed = 4;
-        monster.setHealth(this.statsProvider.getBaseValue() * this.statsProvider.getBaseValue() * 5);
-        console.log(monster.currentHealth);
+        var baseAmount = NumberProvider.getBaseNumberForLevel(this.difficulty);
+        monster.setHealth(baseAmount * baseAmount * 5);
         monster.onAttack = () => {
             this.onPlayerAttacked();
         }
+        this.enemyCount--;
     }
 }

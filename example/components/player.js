@@ -1,21 +1,30 @@
 var Player = (function(){
     var p = {};
-    p.level = 10;
+    p.level = 1;
+    p.experience = 0;
+    p.requiredExperience = 6;
     p.abilityPoints = 0;
-    p.abilities = []
-    var baseStatsProvider = new StatsProvider(p.level);
+    p.abilities = [];
+    p.selectedDifficulty = 1;
+    p.maxReachedDifficulty = 0;
     var baseStats = {
-        health: baseStatsProvider.getBaseValue() * 0.1,
-        basePower: baseStatsProvider.getBaseValue(),
+        health: NumberProvider.getBaseNumberForLevel(p.level) * 0.1,
+        basePower: NumberProvider.getBaseNumberForLevel(p.level),
     };
 
-    p.getPower = function() {
+    p.reInitializeBaseStats = () => {
+        baseStats = {
+            health: NumberProvider.getBaseNumberForLevel(p.level) * 0.1,
+            basePower: NumberProvider.getBaseNumberForLevel(p.level),
+        };
+    }
+
+    p.getPower = () => {
         return baseStats.basePower;
     }
 
-    p.getHealth = function() {
-        console.log(baseStats.health);
-        return baseStats.health *999999999999;
+    p.getHealth = () => {
+        return baseStats.health;
     }
 
     return p;

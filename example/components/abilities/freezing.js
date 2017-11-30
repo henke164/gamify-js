@@ -15,10 +15,6 @@ class FreezingArrowAbility extends BaseAbility
             return;
         }
 
-        if (this.arrowAlreadyHitEnemy(arrow, enemy)) {
-            return;
-        }
-
         if(Math.random() < 0.5) {
             return;
         }

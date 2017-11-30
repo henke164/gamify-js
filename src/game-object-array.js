@@ -15,10 +15,15 @@ class GameObjectArray {
         return obj;
     }
 
-    updateAll() {
+    updateAll(additionalAction) {
         var idx = this.gameObjects.length
         while (idx--) {
             this.gameObjects[idx].update();
+
+            if (additionalAction) {
+                additionalAction(idx, this.gameObjects[idx]);
+            }
+
             if (this.gameObjects[idx].shouldDestroy) {
                 this.gameObjects.splice(idx, 1);
             }

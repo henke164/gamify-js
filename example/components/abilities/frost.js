@@ -5,10 +5,6 @@ class FrostArrowAbility extends BaseAbility
     }
 
     onEnemyHit(arrow, enemy, renderDamageLabel) {
-        if (this.arrowAlreadyHitEnemy(arrow, enemy)) {
-            return;
-        }
-
         if (!enemy.originalSpeed) {
             enemy.originalSpeed = enemy.speed;
         }

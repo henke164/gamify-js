@@ -1,14 +1,15 @@
 class InGameScene {
     constructor(game, difficulty, onGameWon, onGameLost) {
-        this.enemyCount = 5 * difficulty;
+        this.game = game;
+        this.difficulty = difficulty;
+        this.enemyCount = 5 * this.difficulty;
         this.health = Player.getHealth();
-        this.enemyController = new EnemyController(difficulty, this.enemyCount, this.onPlayerAttacked.bind(this));
+        this.enemyController = new EnemyController(this.difficulty, this.enemyCount, this.onPlayerAttacked.bind(this));
         this.combatController = new CombatController(this);
+        this.playerHandler = new PlayerHandler();
         this.bowController = new BowController(this.combatController.onShoot);
         this.background = new Texture2D('images/background.png', Game.screenSize.width, Game.screenSize.height);
-
-        this.winLabel = new Label('Level Completed!', new Vector2(100, 200));
-        this.lostLabel = new Label('You Lost!', new Vector2(100, 200));
+        this.gameCompletedTriggered = false;
     }
 
     onPlayerAttacked() {
@@ -25,7 +26,7 @@ class InGameScene {
         spriteBatch.drawTexture(this.background, Vector2.zero);
         this.combatController.render(spriteBatch);
 
-        if (this.combatController.enemiesDestroyed == this.enemyCount) {
+        if (this.enemyController.enemyCount === 0 && this.enemyController.enemies.length === 0) {
             this.renderGameWon(spriteBatch);
         } else if (this.health <= 0) {
             this.renderGameLost(spriteBatch);
@@ -36,10 +37,33 @@ class InGameScene {
     }
 
     renderGameWon(spriteBatch) {
-        this.winLabel.render(spriteBatch);
+        if (!this.gameCompletedTriggered) {
+            this.gameCompletedTriggered = true;
+            this.resultLabel = new Label('Level Completed! Score:' + this.combatController.enemiesDestroyed, new Vector2(100, 200));
+            this.playerHandler.completeLevel(this.difficulty, this.combatController.enemiesDestroyed, this.setSummary);
+
+            setTimeout(function() {
+                this.game.openMenu();
+            }.bind(this), 2000);
+        }
+
+        this.resultLabel.render(spriteBatch);
+    }
+
+    setSummary(summary) {
+        console.log(summary);
     }
 
     renderGameLost(spriteBatch) {
-        this.lostLabel.render(spriteBatch);
+        if (!this.gameCompletedTriggered) {
+            this.gameCompletedTriggered = true;
+            this.resultLabel = new Label('You Lost!', new Vector2(100, 200));
+
+            setTimeout(function() {
+                this.game.openMenu();
+            }.bind(this), 2000);
+        }
+
+        this.resultLabel.render(spriteBatch);
     }
 }

@@ -1,18 +1,47 @@
 class MenuScene {
     constructor(game) {
-        this.difficulty = 20;
+        this.game = game;
+        this.difficulty = Player.selectedDifficulty;
         this.background = new Texture2D('images/background.png', Game.screenSize.width, Game.screenSize.height);
+
+        this.initializeStartButton();
+        this.initializeTalentButton();
+        this.initializeLevelSelector();
+    }
+
+    initializeStartButton() {
         this.startButton = new Button();
         this.startButton.text = 'Start Game';
         this.startButton.onClick = () => {
-            game.startGame(this.difficulty);
+            console.log('starting with difficulty:' + this.difficulty);
+            this.game.startGame(this.difficulty);
         };
+    }
 
+    initializeTalentButton() {
         this.talentButton = new Button();
         this.talentButton.text = 'Skills';
         this.talentButton.onClick = () => {
-            game.setAbilityTreeScene();
+            this.game.setAbilityTreeScene();
         };
+    }
+
+    initializeLevelSelector() {
+        this.levelSelector = new GameObjectArray();
+        var fromLevel = Player.maxReachedDifficulty == 0 ? 1 : Player.maxReachedDifficulty - 2;
+        var toLevel = Player.maxReachedDifficulty == 0 ? 6 : Player.maxReachedDifficulty + 3;
+
+        for(var x = fromLevel; x < toLevel; x++) {
+            var levelButton = this.levelSelector.addGameObject(Button);
+            levelButton.texture = new Texture2D('images/button.png', 80, 75);
+            levelButton.text = x;
+            levelButton.value = x;
+            var parent = this;
+            levelButton.onClick = function() {
+                parent.difficulty = this.value;
+                Player.selectedDifficulty = this.value;
+            }.bind(levelButton);
+        }
     }
 
     update() {
@@ -24,6 +53,25 @@ class MenuScene {
             (Game.screenSize.width / 2) - (this.talentButton.texture.width / 2),
             Game.screenSize.height / 2);
 
+        this.levelSelector.updateAll((x, btn) => {
+            if (this.difficulty == btn.value) {
+                if(btn.texture.src === 'images/button.png'); {
+                    btn.texture.src = 'images/button_sel.png';
+                }
+            } else {
+                if(btn.texture.src !== 'images/button.png'); {
+                    btn.texture.src = 'images/button.png';
+                }
+            }
+
+            var width = (btn.texture.width + 10) * this.levelSelector.length - 10;
+
+            btn.position = new Vector2(
+                (Game.screenSize.width / 2) - (width / 2) +
+                (x * (btn.texture.width + 10)),
+                200);
+        });
+
         this.startButton.update();
         this.talentButton.update();
     }
@@ -32,5 +80,6 @@ class MenuScene {
         spriteBatch.drawTexture(this.background, Vector2.zero);
         this.startButton.render(spriteBatch);
         this.talentButton.render(spriteBatch);
+        this.levelSelector.renderAll(spriteBatch);
     }
 }

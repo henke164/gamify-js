@@ -12,10 +12,6 @@ class MeltingArrowAbility extends BaseAbility
     }
 
     onEnemyHit(arrow, enemy, renderDamageLabel) {
-        if (this.arrowAlreadyHitEnemy(arrow, enemy)) {
-            return;
-        }
-
         if(arrow.speed > 40) {
             var damage = Math.round(arrow.speed * arrow.power * 2);
             enemy.reduceHealth(damage);

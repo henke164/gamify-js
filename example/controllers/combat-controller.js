@@ -12,8 +12,7 @@ class CombatController
     initializeAbilities() {
         this.abilities = [];
 
-        console.log(Player.abilities);
-        for(var x = 0; x < Player.abilities.length; x++) {
+        for (var x = 0; x < Player.abilities.length; x++) {
             var ability = Player.abilities[x].type;
             var level = Player.abilities[x].level;
             if (level > 0) {
@@ -56,8 +55,11 @@ class CombatController
     }
 
     onEnemyHit(arrow, enemy) {
+        if (this.arrowAlreadyHitEnemy(arrow, enemy)) {
+            return;
+        }
+
         for (var x = 0; x < this.abilities.length; x++) {
-            var t = this;
             this.abilities[x].onEnemyHit(arrow, enemy, this.addDamageLabel.bind(this));
         }
 
@@ -72,12 +74,12 @@ class CombatController
         }
 
         if (enemy.shouldDestroy) {
-            this.onEnemyKilled();
+            this.enemiesDestroyed++;
         }
     }
 
-    onEnemyKilled() {
-        this.enemiesDestroyed++;
+    arrowAlreadyHitEnemy(arrow, enemy) {
+        return arrow.hits && arrow.hits.indexOf(enemy) > -1;
     }
 
     addDamageLabel(amount, position, color = { r: 255, b: 255, g: 255 }) {

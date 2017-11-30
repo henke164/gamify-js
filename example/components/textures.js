@@ -23,3 +23,7 @@ Textures['orcAnimations.movementAnimation'] = [
 Textures['arrows.default'] = new Texture2D("images/arrow.png");
 
 Textures['arrows.frost'] = new Texture2D("images/frost-arrow.png");
+
+Textures['buttons.default'] = new Texture2D('images/button.png', 220, 75);
+
+Textures['buttons.selected'] = new Texture2D('images/button_sel.png', 220, 75);
