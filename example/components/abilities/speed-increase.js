@@ -10,7 +10,7 @@ class SpeedIncreaseAbility extends BaseAbility
     }
 }
 
-SpeedIncreaseAbility.icon = new Texture2D('images/abilities/speed-increase.png', 80);
+SpeedIncreaseAbility.icon = new Texture2D('assets/abilities/speed-increase.png', 80);
 
 SpeedIncreaseAbility.spellName = 'Arrow speed';
 

@@ -8,7 +8,7 @@ class InGameScene {
         this.combatController = new CombatController(this);
         this.playerHandler = new PlayerHandler();
         this.bowController = new BowController(this.combatController.onShoot);
-        this.background = new Texture2D('images/background.png', Game.screenSize.width, Game.screenSize.height);
+        this.background = new Texture2D('assets/background.png', Game.screenSize.width, Game.screenSize.height);
         this.gameCompletedTriggered = false;
     }
 

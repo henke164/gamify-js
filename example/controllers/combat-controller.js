@@ -83,7 +83,7 @@ class CombatController
     }
 
     addDamageLabel(amount, position, color = { r: 255, b: 255, g: 255 }) {
-        var label = new Label(amount, position, '', '14px Arial');
+        var label = new Label(amount, position, 'HVD', '14px');
         label.opacity = 1;
         label.color = color;
         this.animateDamageLabel(label);

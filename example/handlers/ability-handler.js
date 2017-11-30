@@ -9,7 +9,7 @@ class AbilityHandler {
             level: 99
         }, {
             type: SpeedIncreaseAbility,
-            level: 0
+            level: 5
         }, {
             type: FireDotAbility,
             level: 0

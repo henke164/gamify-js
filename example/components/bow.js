@@ -1,6 +1,6 @@
 class Bow extends Sprite {
     constructor() {
-        super(new Texture2D("images/bow.png", 100));
+        super(new Texture2D("assets/bow.png", 100));
         this.position = new Vector2(Game.screenSize.width / 2, Game.screenSize.height - 40);
     }
 

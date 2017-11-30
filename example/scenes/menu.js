@@ -2,7 +2,7 @@ class MenuScene {
     constructor(game) {
         this.game = game;
         this.difficulty = Player.selectedDifficulty;
-        this.background = new Texture2D('images/background.png', Game.screenSize.width, Game.screenSize.height);
+        this.background = new Texture2D('assets/background.png', Game.screenSize.width, Game.screenSize.height);
 
         this.initializeStartButton();
         this.initializeTalentButton();
@@ -33,7 +33,7 @@ class MenuScene {
 
         for(var x = fromLevel; x < toLevel; x++) {
             var levelButton = this.levelSelector.addGameObject(Button);
-            levelButton.texture = new Texture2D('images/button.png', 80, 75);
+            levelButton.texture = new Texture2D('assets/button.png', 80, 75);
             levelButton.text = x;
             levelButton.value = x;
             var parent = this;
@@ -55,12 +55,12 @@ class MenuScene {
 
         this.levelSelector.updateAll((x, btn) => {
             if (this.difficulty == btn.value) {
-                if(btn.texture.src === 'images/button.png'); {
-                    btn.texture.src = 'images/button_sel.png';
+                if(btn.texture.src === 'assets/button.png'); {
+                    btn.texture.src = 'assets/button_sel.png';
                 }
             } else {
-                if(btn.texture.src !== 'images/button.png'); {
-                    btn.texture.src = 'images/button.png';
+                if(btn.texture.src !== 'assets/button.png'); {
+                    btn.texture.src = 'assets/button.png';
                 }
             }
 

@@ -6,7 +6,7 @@ class HealthIncreaseAbility extends BaseAbility
     }
 }
 
-HealthIncreaseAbility.icon = new Texture2D('images/abilities/health.png', 80);
+HealthIncreaseAbility.icon = new Texture2D('assets/abilities/health.png', 80);
 
 HealthIncreaseAbility.spellName = 'Health';
 

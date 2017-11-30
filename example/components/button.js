@@ -3,7 +3,7 @@ class Button extends Sprite {
         super(texture);
         this.text = '';
         this.onClick = () => {};
-        this.font = '30px Arial';
+        this.font = '30px HVD';
         this.color = 'white';
         this.mouseDown = false;
     }
