@@ -28,10 +28,10 @@ class MenuScene {
 
     initializeLevelSelector() {
         this.levelSelector = new GameObjectArray();
-        var fromLevel = Player.maxReachedDifficulty == 0 ? 1 : Player.maxReachedDifficulty - 2;
-        var toLevel = Player.maxReachedDifficulty == 0 ? 6 : Player.maxReachedDifficulty + 3;
+        var fromLevel = Player.maxReachedDifficulty <= 2 ? 1 : Player.maxReachedDifficulty - 2;
+        var toLevel = Player.maxReachedDifficulty <= 2 ? 6 : Player.maxReachedDifficulty + 3;
 
-        for(var x = fromLevel; x < toLevel; x++) {
+        for (var x = fromLevel; x < toLevel; x++) {
             var levelButton = this.levelSelector.addGameObject(Button);
             levelButton.texture = new Texture2D('assets/button.png', 80, 75);
             levelButton.text = x;
