@@ -36,6 +36,8 @@ class FreezingArrowAbility extends BaseAbility
     }
 }
 
+FreezingArrowAbility.id = 3;
+
 FreezingArrowAbility.icon = new Texture2D('assets/abilities/freeze.png', 80);
 
 FreezingArrowAbility.spellName = 'Freezing arrow';

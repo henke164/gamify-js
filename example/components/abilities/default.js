@@ -1,7 +1,7 @@
 class DefaultAbility extends BaseAbility
 {
     constructor(game) {
-        super(game, 0);
+        super(game, 99);
     }
 
     onShoot() {
@@ -24,3 +24,5 @@ class DefaultAbility extends BaseAbility
         renderDamageLabel(Math.round(damage), arrow.position.clone());
     }
 }
+
+DefaultAbility.id = 1;

@@ -27,6 +27,8 @@ class MeltingArrowAbility extends BaseAbility
     }
 }
 
+MeltingArrowAbility.id = 6;
+
 MeltingArrowAbility.icon = new Texture2D('assets/abilities/melting.png', 80);
 
 MeltingArrowAbility.spellName = 'Melting arrow';

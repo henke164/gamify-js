@@ -6,7 +6,7 @@ var Player = (function(){
     p.abilityPoints = 0;
     p.abilities = [];
     p.selectedDifficulty = 1;
-    p.maxReachedDifficulty = 1;
+    p.maxReachedDifficulty = 2;
 
     p.initializeBaseStats = () => {
         baseStats = {

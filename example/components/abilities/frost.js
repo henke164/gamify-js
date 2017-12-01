@@ -26,6 +26,8 @@ class FrostArrowAbility extends BaseAbility
     }
 }
 
+FrostArrowAbility.id = 4;
+
 FrostArrowAbility.icon = new Texture2D('assets/abilities/frost.png', 80);
 
 FrostArrowAbility.spellName = 'Frost arrow';

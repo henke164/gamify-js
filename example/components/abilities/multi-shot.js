@@ -53,6 +53,8 @@ class MultiShotAbility extends BaseAbility
     }
 }
 
+MultiShotAbility.id = 7;
+
 MultiShotAbility.icon = new Texture2D('assets/abilities/blizzard.png', 80);
 
 MultiShotAbility.spellName = 'Blizzard';

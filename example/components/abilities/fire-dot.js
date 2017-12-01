@@ -22,6 +22,8 @@ class FireDotAbility extends BaseAbility
     }
 }
 
+FireDotAbility.id = 2;
+
 FireDotAbility.icon = new Texture2D('assets/abilities/fire.png', 80);
 
 FireDotAbility.spellName = 'Fire DoT';
