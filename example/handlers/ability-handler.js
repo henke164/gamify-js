@@ -1,41 +1,37 @@
 class AbilityHandler {
-    constructor() {
-
+    constructor(game) {
+        this.game = game;
     }
 
-    loadAbilities() {
-        Player.abilities = [{
-            type: DefaultAbility,
-            level: 99
-        }, {
-            type: SpeedIncreaseAbility,
-            level: 5
-        }, {
-            type: FireDotAbility,
-            level: 0
-        }, {
-            type: MeltingArrowAbility,
-            level: 0
-        }, {
-            type: FreezingArrowAbility,
-            level: 0,
-        }, {
-            type: FrostArrowAbility,
-            level: 0
-        }, {
-            type: MultiShotAbility,
-            level: 0
-        }, {
-            type: HealthIncreaseAbility,
-            level: 0
-        }];
+    static getAbilityTypes() {
+        return [
+            DefaultAbility,
+            SpeedIncreaseAbility,
+            FireDotAbility,
+            MeltingArrowAbility,
+            FreezingArrowAbility,
+            FrostArrowAbility,
+            MultiShotAbility,
+            HealthIncreaseAbility
+        ];
     }
 
-    increaseAbilityLevel(abilityType) {
-        var ability = this.getAbility(abilityType);
+    increaseAbilityLevel(abilityId) {
+        var ability = null;
+
+        for(var x = 0; x < Player.abilities.length; x++) {
+            if (Player.abilities[x].id == abilityId) {
+                ability = Player.abilities[x];
+            }
+        }
 
         if (!ability) {
-            return 'Ability could not be found.';
+            ability = {
+                id: abilityId,
+                level: 0
+            };
+            console.log('pushing', ability);
+            Player.abilities.push(ability);
         }
 
         if (ability.level >= 10) {
@@ -43,6 +39,10 @@ class AbilityHandler {
         }
 
         var cost = ability.level;
+
+        if (cost == 0) {
+            cost = 1;
+        }
 
         if (cost > Player.abilityPoints) {
             return 'Not enough points.';
@@ -52,21 +52,17 @@ class AbilityHandler {
 
         ability.level++;
 
-        return 'Successfully upgraded ' + abilityType.spellName + ' to level ' + ability.level;
+        return 'Successfully upgraded ability with id "' + abilityId + '" to level ' + ability.level;
     }
 
-    getAbility(abilityType) {
-        if(!abilityType instanceof BaseAbility) {
-            console.log('Error: "' + abilityType + '" is not an ability.');
-            return;
-        }
-
+    getPlayerAbilityLevelById(abilityId) {
         for(var x = 0; x < Player.abilities.length; x++) {
-            if (Player.abilities[x].type == abilityType) {
-                return Player.abilities[x];
+            if (Player.abilities[x].id == abilityId) {
+                return Player.abilities[x].level;
             }
         }
 
-        console.log('Error: Could not find ability "' + abilityType + '"');
+        console.log('Error: Could not find ability with id "' + abilityId + '"');
+        return 0;
     }
 }

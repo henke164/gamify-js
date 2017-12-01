@@ -2,8 +2,9 @@ class ExampleGame extends Game {
     constructor(canvas) {
         super(canvas);
         this.openMenu();
-        this.abilityHandler = new AbilityHandler();
-        this.abilityHandler.loadAbilities();
+
+        this.playerHandler = new PlayerHandler(this);
+        this.playerHandler.initializePlayer();
     }
 
     openMenu() {

@@ -2,25 +2,24 @@ class CombatController
 {
     constructor(game) {
         this.game = game;
-        this.initializeAbilities();
         this.onEnemyHit = this.onEnemyHit.bind(this);
         this.onShoot = this.onShoot.bind(this);
         this.damageLabels = [];
         this.enemiesDestroyed = 0;
+        this.initializeAbilities();
     }
 
     initializeAbilities() {
         this.abilities = [];
 
+        var allAbilities = AbilityHandler.getAbilityTypes();
         for (var x = 0; x < Player.abilities.length; x++) {
-            var ability = Player.abilities[x].type;
-            var level = Player.abilities[x].level;
-            if (level > 0) {
-                this.abilities.push(new ability(this.game, level));
+            for (var y = 0; y < allAbilities.length; y++) {
+                if (Player.abilities[x].id == allAbilities[y].id) {
+                    this.abilities.push(new allAbilities[y](game, Player.abilities[x].level));
+                }
             }
         }
-
-        this.abilities.push(new DefaultAbility(this.game));
     }
 
     onShoot() {

@@ -1,6 +1,16 @@
 class PlayerHandler {
-    constructor() {
+    constructor(game) {
+        this.game = game;
+    }
 
+    initializePlayer() {
+        Player.abilities = [
+            { id: 1, level: 99 },
+            { id: 2, level: 3 },
+            { id: 5, level: 9 }
+        ];
+
+        console.log(Player.abilities);
     }
 
     // Todo, handle on server
