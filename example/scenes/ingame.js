@@ -9,7 +9,13 @@ class InGameScene {
         this.playerHandler = new PlayerHandler();
         this.bowController = new BowController(this.combatController.onShoot);
         this.background = new Texture2D('assets/background.png', Game.screenSize.width, Game.screenSize.height);
-        this.gameCompletedTriggered = false;
+        this.gameState = GAME_STATE_RUNNING;
+
+        /*
+        this.enemyController.enemyCount = 0;
+        this.enemyController.enemies = new GameObjectArray();
+        this.combatController.enemiesDestroyed = this.enemyCount;
+        */
     }
 
     onPlayerAttacked() {
@@ -17,28 +23,20 @@ class InGameScene {
     }
 
     update() {
-        this.bowController.update();
-        this.enemyController.update();
-        this.combatController.update();
-    }
-
-    render(spriteBatch) {
-        spriteBatch.drawTexture(this.background, Vector2.zero);
-        this.combatController.render(spriteBatch);
-
         if (this.enemyController.enemyCount === 0 && this.enemyController.enemies.length === 0) {
-            this.renderGameWon(spriteBatch);
+            this.setGameWon();
         } else if (this.health <= 0) {
-            this.renderGameLost(spriteBatch);
+            this.setGameLost();
         } else {
-            this.bowController.renderBowAndArrows(spriteBatch);
-            this.enemyController.renderEnemies(spriteBatch);
+            this.bowController.update();
+            this.enemyController.update();
+            this.combatController.update();
         }
     }
 
-    renderGameWon(spriteBatch) {
-        if (!this.gameCompletedTriggered) {
-            this.gameCompletedTriggered = true;
+    setGameWon() {
+        if (this.gameState == GAME_STATE_RUNNING) {
+            this.gameState = GAME_STATE_WON;
             this.resultLabel = new Label('Level Completed! Score:' + this.combatController.enemiesDestroyed, new Vector2(100, 200));
             this.playerHandler.completeLevel(this.difficulty, this.combatController.enemiesDestroyed, this.setSummary);
 
@@ -46,24 +44,36 @@ class InGameScene {
                 this.game.openMenu();
             }.bind(this), 2000);
         }
-
-        this.resultLabel.render(spriteBatch);
     }
 
-    setSummary(summary) {
-        console.log(summary);
-    }
-
-    renderGameLost(spriteBatch) {
-        if (!this.gameCompletedTriggered) {
-            this.gameCompletedTriggered = true;
+    setGameLost() {
+        if (this.gameState == GAME_STATE_RUNNING) {
+            this.gameState = GAME_STATE_LOST;
             this.resultLabel = new Label('You Lost!', new Vector2(100, 200));
 
             setTimeout(function() {
                 this.game.openMenu();
             }.bind(this), 2000);
         }
+    }
 
-        this.resultLabel.render(spriteBatch);
+    render(spriteBatch) {
+        spriteBatch.drawTexture(this.background, Vector2.zero);
+        this.combatController.render(spriteBatch);
+
+        if (this.gameState == GAME_STATE_RUNNING) {
+            this.bowController.renderBowAndArrows(spriteBatch);
+            this.enemyController.renderEnemies(spriteBatch);
+        } else {
+            this.resultLabel.render(spriteBatch);
+        }
+    }
+
+    setSummary(summary) {
+        console.log(summary);
     }
 }
+
+var GAME_STATE_RUNNING = 1;
+var GAME_STATE_WON = 2;
+var GAME_STATE_LOST = 3;

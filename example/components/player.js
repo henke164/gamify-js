@@ -6,13 +6,9 @@ var Player = (function(){
     p.abilityPoints = 0;
     p.abilities = [];
     p.selectedDifficulty = 1;
-    p.maxReachedDifficulty = 0;
-    var baseStats = {
-        health: NumberProvider.getBaseNumberForLevel(p.level) * 0.1,
-        basePower: NumberProvider.getBaseNumberForLevel(p.level),
-    };
+    p.maxReachedDifficulty = 1;
 
-    p.reInitializeBaseStats = () => {
+    p.initializeBaseStats = () => {
         baseStats = {
             health: NumberProvider.getBaseNumberForLevel(p.level) * 0.1,
             basePower: NumberProvider.getBaseNumberForLevel(p.level),
@@ -26,6 +22,8 @@ var Player = (function(){
     p.getHealth = () => {
         return baseStats.health;
     }
+
+    p.initializeBaseStats();
 
     return p;
 })();

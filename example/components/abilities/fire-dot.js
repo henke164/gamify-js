@@ -5,15 +5,19 @@ class FireDotAbility extends BaseAbility
     }
 
     onEnemyHit(arrow, enemy, renderDamageLabel) {
-        var burnPower = Math.round((arrow.speed * arrow.power) * (0.1 * this.level));
+        enemy.burnPower = Math.round((arrow.speed * arrow.power) * (0.1 * this.level));
+
+        if (enemy.burnInterval) {
+            return;
+        }
 
         enemy.burnInterval = setInterval(() => {
             if (enemy.shouldDestroy) {
                 clearInterval(enemy.burnInterval);
                 return;
             }
-            enemy.reduceHealth(burnPower);
-            renderDamageLabel(burnPower, enemy.position.clone(), { r:255, g:255, b:0 });
+            enemy.reduceHealth(enemy.burnPower);
+            renderDamageLabel(enemy.burnPower, enemy.position.clone(), { r:255, g:255, b:0 });
         }, 500);
     }
 }
