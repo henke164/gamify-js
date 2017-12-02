@@ -13,20 +13,31 @@ class AbilityTreeScene {
             game.openMenu();
         };
 
-        this.backToTreeButton = new Button();
-        this.backToTreeButton.text = 'Back';
-        this.backToTreeButton.onClick = () => {
-            this.selectedAbility = null;
-        };
-
-        this.upgradeButton = new Button();
-        this.upgradeButton.text = "Upgrade";
-
         this.upgradeStatusLabel = new Label('', Vector2.zero, 'white', '14px', 'HVD');
 
         this.initializeAbilityTree = this.initializeAbilityTree.bind(this);
 
+        this.initializeBackButton();
+        this.initializeUpgradeButton();
         this.initializeAbilityTree();
+    }
+
+    initializeBackButton() {
+        this.backToTreeButton = new Button(Textures['buttons.close']);
+        this.backToTreeButton.onClick = () => {
+            this.selectedAbility = null;
+        };
+        this.backToTreeButton.position = new Vector2(
+            Game.screenSize.width - 50, this.position.y);
+    }
+
+    initializeUpgradeButton() {
+        this.upgradeButton = new Button();
+        this.upgradeButton.text = "Upgrade";
+
+        this.upgradeButton.position = new Vector2(
+            Game.screenSize.width - 250,
+            this.position.y + 270);
     }
 
     initializeAbilityTree() {
@@ -83,7 +94,7 @@ class AbilityTreeScene {
                     parent.initializeAbilityTree();
                     setTimeout(function() {
                         parent.upgradeStatusLabel.text = '';
-                    }, 2000);
+                    }, 5000);
                 };
             }.bind(ability);
         }
@@ -101,14 +112,6 @@ class AbilityTreeScene {
         this.backToMenuButton.update();
 
         if (this.selectedAbility) {
-            this.upgradeButton.position = new Vector2(
-                (Game.screenSize.width / 2) - (this.upgradeButton.texture.width) - 5,
-                Game.screenSize.height / 2 - 100);
-
-            this.backToTreeButton.position = new Vector2(
-                (Game.screenSize.width / 2) + 5,
-                Game.screenSize.height / 2 - 100);
-
             this.upgradeButton.update();
             this.backToTreeButton.update();
         }
@@ -156,9 +159,8 @@ class AbilityTreeScene {
         for(var x = 0; x < this.selectedAbility.description.length; x++) {
             spriteBatch.drawText(this.selectedAbility.description[x], new Vector2(50, 180 + (x * 20)), "16px HVD", 'white');
         }
-
         if(this.upgradeStatusLabel.text !== '') {
-            var size = spriteBatch.context.measureText(this.upgradeStatusLabel.text);
+            var size = 1//spriteBatch.context.measureText(this.upgradeStatusLabel.text);
 
             this.upgradeStatusLabel.position = new Vector2(
                 (Game.screenSize.width / 2) - (size.width / 2),

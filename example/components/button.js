@@ -28,10 +28,25 @@ class Button extends Sprite {
         spriteBatch.drawTexture(this.texture, this.position);
 
         var textSize = spriteBatch.context.measureText(this.text);
-        spriteBatch.drawText(this.text,
-            new Vector2(
+        
+        if (this.texture.loaded && this.text !== '') {
+            this.textPos = new Vector2(
                 this.position.x + (this.texture.width / 2) - (textSize.width / 2),
-                this.position.y + (this.texture.height / 2) + 8),
+                this.position.y + (this.texture.height / 2) + 3);
+        } else {
+            spriteBatch.drawText(this.text,
+                Vector2.zero,
+                this.font,
+                this.color);
+            return;
+        }
+
+        if (this.textPos === null) {
+            return;
+        }
+
+        spriteBatch.drawText(this.text,
+            this.textPos,
             this.font,
             this.color);
     }

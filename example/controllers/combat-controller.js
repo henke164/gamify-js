@@ -16,7 +16,7 @@ class CombatController
         for (var x = 0; x < Player.abilities.length; x++) {
             for (var y = 0; y < allAbilities.length; y++) {
                 if (Player.abilities[x].id == allAbilities[y].id) {
-                    this.abilities.push(new allAbilities[y](game, Player.abilities[x].level));
+                    this.abilities.push(new allAbilities[y](this.game, Player.abilities[x].level));
                 }
             }
         }
