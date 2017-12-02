@@ -59,4 +59,4 @@ MultiShotAbility.icon = new Texture2D('assets/abilities/blizzard.png', 80);
 
 MultiShotAbility.spellName = 'Blizzard';
 
-MultiShotAbility.description = ['Fires 1 additional frost arrow per level that deals', '25% of the main arrow damage.'];
+MultiShotAbility.description = 'Fires 1 additional frost arrow per level that deals', '25% of the main arrow damage.';

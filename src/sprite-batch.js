@@ -34,9 +34,33 @@ class SpriteBatch {
         this.context.restore();
     }
 
-    drawText(text, position, font = '12px Arial', color = 'black') {
+    drawText(text, position, font = '12px Arial', color = 'black', maxWidth = null) {
         this.context.font = font;
         this.context.fillStyle = color;
-        this.context.fillText(text, position.x, position.y);
+
+        if (maxWidth) {
+            var textParts = text.split(' ');
+            var row = [];
+            var currentWidth = 0;
+            var topMargin = 0;
+            for (var x = 0; x < textParts.length; x++) {
+                var wordSize = this.context.measureText(textParts[x]);
+
+                if (currentWidth + wordSize.width > maxWidth) {
+                    this.context.fillText(row.join(' '), position.x, position.y + topMargin);
+                    row = [textParts[x]];
+                    currentWidth = 0;
+                    topMargin += 20;
+                } else {
+                    currentWidth += wordSize.width;
+                    row.push(textParts[x]);
+                    if (x + 1 == textParts.length) {
+                        this.context.fillText(row.join(' '), position.x, position.y + topMargin);
+                    }
+                }
+            }
+        } else {
+            this.context.fillText(text, position.x, position.y);
+        }
     }
 }

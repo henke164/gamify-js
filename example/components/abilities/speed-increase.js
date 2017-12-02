@@ -16,4 +16,4 @@ SpeedIncreaseAbility.icon = new Texture2D('assets/abilities/speed-increase.png',
 
 SpeedIncreaseAbility.spellName = 'Arrow speed';
 
-SpeedIncreaseAbility.description = ['Increases arrow speed by 1% each level.'];
+SpeedIncreaseAbility.description = 'Increases arrow speed by 1% each level.';

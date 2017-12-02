@@ -12,4 +12,4 @@ HealthIncreaseAbility.icon = new Texture2D('assets/abilities/health.png', 80);
 
 HealthIncreaseAbility.spellName = 'Health';
 
-HealthIncreaseAbility.description = ['Increases health by 10% each level.'];
+HealthIncreaseAbility.description = 'Increases health by 10% each level.';

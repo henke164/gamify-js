@@ -34,7 +34,6 @@ class AbilityTreeScene {
     initializeUpgradeButton() {
         this.upgradeButton = new Button();
         this.upgradeButton.text = "Upgrade";
-
         this.upgradeButton.position = new Vector2(
             Game.screenSize.width - 250,
             this.position.y + 270);
@@ -152,15 +151,14 @@ class AbilityTreeScene {
     }
 
     renderSelectedAbility(spriteBatch) {
-        var iconLocation = new Vector2(50, 70);
+        var iconLocation = new Vector2(this.position.x + 40, this.position.y + 50);
         spriteBatch.drawTexture(this.selectedAbility.icon, iconLocation);
-        spriteBatch.drawText(this.selectedAbility.spellName, new Vector2(145, 90), "24px HVD", 'white');
+        spriteBatch.drawText(this.selectedAbility.spellName, new Vector2(this.position.x + 185, this.position.y + 85), "24px HVD", 'Black');
 
-        for(var x = 0; x < this.selectedAbility.description.length; x++) {
-            spriteBatch.drawText(this.selectedAbility.description[x], new Vector2(50, 180 + (x * 20)), "16px HVD", 'white');
-        }
+        spriteBatch.drawText(this.selectedAbility.description, new Vector2(this.position.x + 185, this.position.y + 115), "16px HVD", 'Black', 190);
+
         if(this.upgradeStatusLabel.text !== '') {
-            var size = 1//spriteBatch.context.measureText(this.upgradeStatusLabel.text);
+            var size = spriteBatch.context.measureText(this.upgradeStatusLabel.text);
 
             this.upgradeStatusLabel.position = new Vector2(
                 (Game.screenSize.width / 2) - (size.width / 2),

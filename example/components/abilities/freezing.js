@@ -42,4 +42,4 @@ FreezingArrowAbility.icon = new Texture2D('assets/abilities/freeze.png', 80);
 
 FreezingArrowAbility.spellName = 'Freezing arrow';
 
-FreezingArrowAbility.description = ['Main arrow has a 50% chance to freeze the enemy', 'for 0.5 sec per level.'];
+FreezingArrowAbility.description = 'Main arrow has a 50% chance to freeze the enemy', 'for 0.5 sec per level.';

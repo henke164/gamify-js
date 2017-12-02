@@ -28,4 +28,4 @@ FireDotAbility.icon = new Texture2D('assets/abilities/fire.png', 80);
 
 FireDotAbility.spellName = 'Fire DoT';
 
-FireDotAbility.description = ['Does 10% (for each level) extra fire-damage', 'every 0.5 second until it dies.'];
+FireDotAbility.description = 'Does 10% (for each level) extra fire-damage', 'every 0.5 second until it dies.';
