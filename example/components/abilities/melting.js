@@ -33,4 +33,4 @@ MeltingArrowAbility.icon = new Texture2D('assets/abilities/melting.png', 80);
 
 MeltingArrowAbility.spellName = 'Melting arrow';
 
-MeltingArrowAbility.description = 'Main arrow pierce trough 1 enemy per level and', 'deal additional 200% damage.';
+MeltingArrowAbility.description = 'Main arrow pierce trough 1 enemy per level and deal additional 200% damage.';

@@ -28,19 +28,48 @@ class MenuScene {
 
     initializeLevelSelector() {
         this.levelSelector = new GameObjectArray();
-        var fromLevel = Player.maxReachedDifficulty <= 2 ? 1 : Player.maxReachedDifficulty - 2;
-        var toLevel = Player.maxReachedDifficulty <= 2 ? 6 : Player.maxReachedDifficulty + 3;
+        var levelSelectorSize = { 
+            width: 80, 
+            height: 75 
+        };
 
-        for (var x = fromLevel; x < toLevel; x++) {
-            var levelButton = this.levelSelector.addGameObject(Button);
-            levelButton.texture = new Texture2D('assets/button.png', 80, 75);
-            levelButton.text = x;
-            levelButton.value = x;
+        var row = 0;
+        var column = 0;
+        var level = 1;
+        for (var x = 0; x < 10; x++) {
+            var enabled = level <= Player.maxReachedDifficulty + 2;
             var parent = this;
+            var levelButton = this.levelSelector.addGameObject(Button);
+            levelButton.position = new Vector2((column * levelSelectorSize.width), 250 + (row * levelSelectorSize.height));
+
+            if (enabled) {
+                levelButton.text = level;
+                levelButton.texture = Textures['levelSelector.enabled']
+                var ribbon = this.levelSelector.addGameObject(Sprite);
+
+                if (level > Player.maxReachedDifficulty) {
+                    ribbon.texture = new Texture2D('assets/ribbon_0.png', levelSelectorSize.width);
+                } else {
+                    ribbon.texture = new Texture2D('assets/ribbon_1.png', levelSelectorSize.width);
+                }
+
+                ribbon.position = new Vector2(levelButton.position.x + levelSelectorSize.width / 2, levelButton.position.y + levelSelectorSize.height - 14);
+            } else {
+                levelButton.texture = new Texture2D('assets/level_locked.png', levelSelectorSize.width, levelSelectorSize.height);
+            }
+
+            levelButton.value = level++;
             levelButton.onClick = function() {
                 parent.difficulty = this.value;
                 Player.selectedDifficulty = this.value;
             }.bind(levelButton);
+
+            if (x == 4) {
+                row++;
+                column = 0;
+            } else {            
+                column++;
+            }
         }
     }
 
@@ -54,22 +83,16 @@ class MenuScene {
             Game.screenSize.height / 2);
 
         this.levelSelector.updateAll((x, btn) => {
+            
             if (this.difficulty == btn.value) {
-                if(btn.texture.src === 'assets/button.png'); {
-                    btn.texture.src = 'assets/button_sel.png';
+                if (btn.texture === Textures['levelSelector.enabled']) {
+                    btn.texture = Textures['levelSelector.selected'];
                 }
             } else {
-                if(btn.texture.src !== 'assets/button.png'); {
-                    btn.texture.src = 'assets/button.png';
+                if (btn.texture === Textures['levelSelector.selected']) {
+                    btn.texture = Textures['levelSelector.enabled'];
                 }
             }
-
-            var width = (btn.texture.width + 10) * this.levelSelector.length - 10;
-
-            btn.position = new Vector2(
-                (Game.screenSize.width / 2) - (width / 2) +
-                (x * (btn.texture.width + 10)),
-                200);
         });
 
         this.startButton.update();
