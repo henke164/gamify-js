@@ -32,6 +32,6 @@ Textures['buttons.close'] = new Texture2D('assets/close.png', 50, 50);
 
 Textures['labels.red'] = new Texture2D('assets/red_label.png');
 
-Textures['levelSelector.enabled'] = new Texture2D('assets/level_enabled.png', 80, 75);
+Textures['difficultySelector.enabled'] = new Texture2D('assets/level_enabled.png', 80, 75);
 
-Textures['levelSelector.selected'] = new Texture2D('assets/level_enabled_selected.png', 80, 75);
+Textures['difficultySelector.selected'] = new Texture2D('assets/level_enabled_selected.png', 80, 75);

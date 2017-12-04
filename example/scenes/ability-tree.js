@@ -104,15 +104,15 @@ class AbilityTreeScene {
             (Game.screenSize.width / 2) - (this.backToMenuButton.texture.width / 2),
             Game.screenSize.height - 200);
 
-        for (var x = 0; x < this.abilityTree.length; x++) {
-            this.abilityTree[x].button.update();
-        }
-
-        this.backToMenuButton.update();
-
         if (this.selectedAbility) {
             this.upgradeButton.update();
             this.backToTreeButton.update();
+        } else {
+            for (var x = 0; x < this.abilityTree.length; x++) {
+                this.abilityTree[x].button.update();
+            }
+
+            this.backToMenuButton.update();
         }
     }
 
