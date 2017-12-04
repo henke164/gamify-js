@@ -2,7 +2,7 @@ class ExampleGame extends Game {
     constructor(canvas) {
         super(canvas);
         this.openMenu();
-
+        this.topMenu = new TopMenu(this);
         this.playerHandler = new PlayerHandler(this);
         this.playerHandler.initializePlayer();
     }
@@ -26,6 +26,7 @@ class ExampleGame extends Game {
 
     render(spriteBatch) {
         this.currentScene.render(spriteBatch);
+        this.topMenu.render(spriteBatch);
         super.render();
     }
 }

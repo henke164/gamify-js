@@ -27,4 +27,3 @@ var Player = (function(){
 
     return p;
 })();
-//level = constant * sqrt(XP)

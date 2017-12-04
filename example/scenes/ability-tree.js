@@ -1,9 +1,8 @@
 class AbilityTreeScene {
     constructor(game) {
-        this.position = new Vector2(0, 0);
+        this.position = new Vector2(0, 50);
         this.background = new Texture2D('assets/background.png', Game.screenSize.width, Game.screenSize.height);
         this.panel = new Texture2D('assets/scroll.png', Game.screenSize.width);
-        this.smallPanel = new Texture2D('assets/panel.png', Game.screenSize.width - 20);
         this.abilityHandler = new AbilityHandler(game);
         this.selectedAbility = null;
 
@@ -15,26 +14,9 @@ class AbilityTreeScene {
 
         this.initializeAbilityTree = this.initializeAbilityTree.bind(this);
 
-        this.initializeBackButton();
-        this.initializeUpgradeButton();
+        this.abilityPartial = new AbilityPartialScene(this);
+
         this.initializeAbilityTree();
-    }
-
-    initializeBackButton() {
-        this.backToTreeButton = new Button(Textures['buttons.close']);
-        this.backToTreeButton.onClick = () => {
-            this.selectedAbility = null;
-        };
-        this.backToTreeButton.position = new Vector2(
-            Game.screenSize.width - 50, this.position.y);
-    }
-
-    initializeUpgradeButton() {
-        this.upgradeButton = new Button();
-        this.upgradeButton.text = "Upgrade";
-        this.upgradeButton.position = new Vector2(
-            Game.screenSize.width - 250,
-            this.position.y + 270);
     }
 
     initializeAbilityTree() {
@@ -86,13 +68,7 @@ class AbilityTreeScene {
                     description: this.ability.description
                 };
 
-                parent.upgradeButton.onClick = function() {
-                    parent.upgradeStatusText = parent.abilityHandler.increaseAbilityLevel(parent.selectedAbility.id);
-                    parent.initializeAbilityTree();
-                    setTimeout(function() {
-                        parent.upgradeStatusText = null;
-                    }, 5000);
-                };
+                parent.abilityPartial.setSelectedAbility(this.ability);
             }.bind(ability);
         }
     }
@@ -103,8 +79,7 @@ class AbilityTreeScene {
             Game.screenSize.height - 200);
 
         if (this.selectedAbility) {
-            this.upgradeButton.update();
-            this.backToTreeButton.update();
+            this.abilityPartial.update();
         } else {
             for (var x = 0; x < this.abilityTree.length; x++) {
                 this.abilityTree[x].button.update();
@@ -116,11 +91,10 @@ class AbilityTreeScene {
 
     render(spriteBatch) {
         spriteBatch.drawTexture(this.background, Vector2.zero);
-        spriteBatch.drawTexture(this.panel, Vector2.zero);
+        spriteBatch.drawTexture(this.panel, this.position);
         this.renderGeneralTree(spriteBatch);
         if (this.selectedAbility) {
-            spriteBatch.drawTexture(this.smallPanel, new Vector2(10, 10));
-            this.renderSelectedAbility(spriteBatch);
+            this.abilityPartial.render(spriteBatch);
         }
     }
 
@@ -146,19 +120,5 @@ class AbilityTreeScene {
         }
 
         this.backToMenuButton.render(spriteBatch);
-    }
-
-    renderSelectedAbility(spriteBatch) {
-        var iconLocation = new Vector2(this.position.x + 40, this.position.y + 50);
-        spriteBatch.drawTexture(this.selectedAbility.icon, iconLocation);
-        spriteBatch.drawText(this.selectedAbility.spellName, new Vector2(this.position.x + 185, this.position.y + 85), "24px HVD", 'Black');
-        spriteBatch.drawText(this.selectedAbility.description, new Vector2(this.position.x + 185, this.position.y + 115), "16px HVD", 'Black', 190);
-
-        if (this.upgradeStatusText) {
-            spriteBatch.drawText(this.upgradeStatusText, new Vector2(this.position.x + 185, this.position.y + 185), "12px HVD", 'Green', 190);
-        }
-
-        this.upgradeButton.render(spriteBatch);
-        this.backToTreeButton.render(spriteBatch);
     }
 }
