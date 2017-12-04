@@ -12,6 +12,9 @@ class MenuScene {
     initializeStartButton() {
         this.startButton = new Button();
         this.startButton.text = 'Start';
+        this.startButton.position = new Vector2(10, 280);
+        this.startButton.font = '24px HVD';
+
         this.startButton.onClick = () => {
             console.log('starting with difficulty:' + Player.selectedDifficulty);
             this.game.startGame(Player.selectedDifficulty);
@@ -20,19 +23,15 @@ class MenuScene {
 
     initializeTalentButton() {
         this.talentButton = new Button();
-        this.talentButton.text = 'Skills';
+        this.talentButton.text = 'Power-ups';
+        this.talentButton.position = new Vector2(245, 280);
+        this.talentButton.font = '24px HVD';
         this.talentButton.onClick = () => {
             this.game.setAbilityTreeScene();
         };
     }
 
     update() {
-        this.startButton.position = new Vector2(200, 280);
-
-        this.talentButton.position = new Vector2(
-            (Game.screenSize.width / 2) - (this.talentButton.texture.width / 2),
-            Game.screenSize.height / 2);
-
         this.difficultySelector.update();
         this.startButton.update();
         this.talentButton.update();

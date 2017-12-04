@@ -13,8 +13,6 @@ class AbilityTreeScene {
             game.openMenu();
         };
 
-        this.upgradeStatusLabel = new Label('', Vector2.zero, 'white', '14px', 'HVD');
-
         this.initializeAbilityTree = this.initializeAbilityTree.bind(this);
 
         this.initializeBackButton();
@@ -89,10 +87,10 @@ class AbilityTreeScene {
                 };
 
                 parent.upgradeButton.onClick = function() {
-                    parent.upgradeStatusLabel.text = parent.abilityHandler.increaseAbilityLevel(parent.selectedAbility.id);
+                    parent.upgradeStatusText = parent.abilityHandler.increaseAbilityLevel(parent.selectedAbility.id);
                     parent.initializeAbilityTree();
                     setTimeout(function() {
-                        parent.upgradeStatusLabel.text = '';
+                        parent.upgradeStatusText = null;
                     }, 5000);
                 };
             }.bind(ability);
@@ -154,17 +152,10 @@ class AbilityTreeScene {
         var iconLocation = new Vector2(this.position.x + 40, this.position.y + 50);
         spriteBatch.drawTexture(this.selectedAbility.icon, iconLocation);
         spriteBatch.drawText(this.selectedAbility.spellName, new Vector2(this.position.x + 185, this.position.y + 85), "24px HVD", 'Black');
-
         spriteBatch.drawText(this.selectedAbility.description, new Vector2(this.position.x + 185, this.position.y + 115), "16px HVD", 'Black', 190);
 
-        if(this.upgradeStatusLabel.text !== '') {
-            var size = spriteBatch.context.measureText(this.upgradeStatusLabel.text);
-
-            this.upgradeStatusLabel.position = new Vector2(
-                (Game.screenSize.width / 2) - (size.width / 2),
-                Game.screenSize.height - 600);
-
-            this.upgradeStatusLabel.render(spriteBatch);
+        if (this.upgradeStatusText) {
+            spriteBatch.drawText(this.upgradeStatusText, new Vector2(this.position.x + 185, this.position.y + 185), "12px HVD", 'Green', 190);
         }
 
         this.upgradeButton.render(spriteBatch);
