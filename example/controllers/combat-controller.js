@@ -1,11 +1,10 @@
 class CombatController
 {
-    constructor(game) {
-        this.game = game;
+    constructor(scene) {
+        this.scene = scene;
         this.onEnemyHit = this.onEnemyHit.bind(this);
         this.onShoot = this.onShoot.bind(this);
         this.damageLabels = [];
-        this.enemiesDestroyed = 0;
         this.initializeAbilities();
     }
 
@@ -16,7 +15,7 @@ class CombatController
         for (var x = 0; x < Player.abilities.length; x++) {
             for (var y = 0; y < allAbilities.length; y++) {
                 if (Player.abilities[x].id == allAbilities[y].id) {
-                    this.abilities.push(new allAbilities[y](this.game, Player.abilities[x].level));
+                    this.abilities.push(new allAbilities[y](this.scene, Player.abilities[x].level));
                 }
             }
         }
@@ -41,8 +40,8 @@ class CombatController
 
     handleArrowAndEnemyCollisions() {
         var collisions = CollisionDetector.findCollisions(
-            this.game.bowController.arrows.gameObjects,
-            this.game.enemyController.enemies.gameObjects);
+            this.scene.bowController.arrows.gameObjects,
+            this.scene.enemyController.enemies.gameObjects);
 
         this.runActionForCollisions(collisions, this.onEnemyHit);
     }
@@ -63,17 +62,13 @@ class CombatController
         }
 
         if (arrow.destroyOnImpact) {
-            arrow.shouldDestroy = true;
+            arrow.destroy();
         }
 
         if (!arrow.hits) {
             arrow.hits = [enemy];
         } else {
             arrow.hits.push(enemy);
-        }
-
-        if (enemy.shouldDestroy) {
-            this.enemiesDestroyed++;
         }
     }
 

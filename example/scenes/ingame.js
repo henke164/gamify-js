@@ -4,22 +4,23 @@ class InGameScene {
         this.difficulty = difficulty;
         this.enemyCount = 5 * this.difficulty;
         this.health = Player.getHealth();
-        this.enemyController = new EnemyController(this.difficulty, this.enemyCount, this.onPlayerAttacked.bind(this));
+        this.enemyController = new EnemyController(this, this.difficulty, this.enemyCount, this.onPlayerAttacked.bind(this));
         this.combatController = new CombatController(this);
         this.playerHandler = new PlayerHandler();
         this.bowController = new BowController(this.combatController.onShoot);
         this.background = new Texture2D('assets/background.png', Game.screenSize.width, Game.screenSize.height);
         this.gameState = GAME_STATE_RUNNING;
-
+        this.game.topMenu.setEnemyCount(this.enemyCount);
         /*
         this.enemyController.enemyCount = 0;
         this.enemyController.enemies = new GameObjectArray();
-        this.combatController.enemiesDestroyed = this.enemyCount;
+        this.enemyController.enemiesDestroyed = this.enemyCount;
         */
     }
 
     onPlayerAttacked() {
         this.health--;
+        this.game.topMenu.onEnemyDestroyed();
     }
 
     update() {
@@ -37,8 +38,8 @@ class InGameScene {
     setGameWon() {
         if (this.gameState == GAME_STATE_RUNNING) {
             this.gameState = GAME_STATE_WON;
-            this.resultLabel = new Label('Level Completed! Score:' + this.combatController.enemiesDestroyed, new Vector2(100, 200));
-            this.playerHandler.completeLevel(this.difficulty, this.combatController.enemiesDestroyed, this.setSummary);
+            this.resultLabel = new Label('Level Completed! Score:' + this.enemyController.enemiesDestroyed, new Vector2(100, 200));
+            this.playerHandler.completeLevel(this.difficulty, this.enemyController.enemiesDestroyed, this.setSummary);
 
             setTimeout(function() {
                 this.game.openMenu();

@@ -19,12 +19,12 @@ class Monster extends Sprite {
 
         if (this.position.y > Game.screenSize.height) {
             this.onAttack();
-            this.shouldDestroy = true;
+            this.destroy();
         }
 
         super.update();
     }
-    
+
     reduceHealth(amount) {
         if (this.shouldDestroy) {
             return;

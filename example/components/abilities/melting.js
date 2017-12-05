@@ -19,7 +19,7 @@ class MeltingArrowAbility extends BaseAbility
         }
 
         if (arrow.piercings <= 0) {
-            arrow.shouldDestroy = true;
+            arrow.destroy();
         }
 
 

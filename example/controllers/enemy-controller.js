@@ -1,10 +1,12 @@
 class EnemyController {
-    constructor(difficulty, enemyCount, onPlayerAttacked) {
+    constructor(scene, difficulty, enemyCount, onPlayerAttacked) {
+        this.scene = scene;
         this.difficulty = difficulty;
         this.enemies = new GameObjectArray();
         this.ticksUntilNextSpawn = 0;
         this.onPlayerAttacked = onPlayerAttacked;
         this.enemyCount = enemyCount;
+        this.enemiesDestroyed = 0;
         this.setSpawnTime();
     }
 
@@ -33,7 +35,13 @@ class EnemyController {
         if(this.timer >= 30) {
             this.timer = 0;
         }
-        this.enemies.updateAll();
+
+        this.enemies.updateAll((idx, enemy) => {
+            if (enemy.shouldDestroy) {
+                this.enemiesDestroyed++;
+                this.scene.game.topMenu.onEnemyDestroyed();
+            }
+        });
     }
 
     renderEnemies(spriteBatch) {
