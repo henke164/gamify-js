@@ -15,7 +15,17 @@ class DifficultySelector {
 
         var row = 0;
         var column = 0;
-        var level = 1;
+        var level = Player.maxReachedDifficulty - 6;
+
+        if (level < 1) {
+            level = 1;
+        }
+
+        if (Player.selectedDifficulty < level) {
+            Player.selectedDifficulty = level;
+        }
+
+        console.log(level);
         for (var x = 0; x < 10; x++) {
             var enabled = level <= Player.maxReachedDifficulty + 2;
             var parent = this;
@@ -30,7 +40,7 @@ class DifficultySelector {
                 levelButton.onClick = function() {
                     Player.selectedDifficulty = this.value;
                 }.bind(levelButton);
-                this.initializeRibbon(levelButton);
+                this.initializeRibbon(levelButton, level);
             } else {
                 levelButton.texture = new Texture2D('assets/level_locked.png', this.difficultySelectorSize.width, this.difficultySelectorSize.height);
             }
