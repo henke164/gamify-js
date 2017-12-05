@@ -1,6 +1,6 @@
 class BaseAbility {
-    constructor(game, level) {
-        this.game = game;
+    constructor(scene, level) {
+        this.scene = scene;
         this.level = level;
     }
 

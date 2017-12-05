@@ -1,11 +1,11 @@
 class MultiShotAbility extends BaseAbility
 {
-    constructor(game, level) {
-        super(game, level);
+    constructor(scene, level) {
+        super(scene, level);
     }
 
     onShoot() {
-        var bowController = this.game.bowController;
+        var bowController = this.scene.bowController;
         var mainArrow = bowController.arrow;
         var angle = this.level * 3;
 
@@ -30,7 +30,7 @@ class MultiShotAbility extends BaseAbility
     }
 
     shootClonedArrowTowardsDirection(targetLocation) {
-        var bowController = this.game.bowController;
+        var bowController = this.scene.bowController;
         var mainArrow = bowController.arrow;
         var arrow = bowController.arrows.addGameObject(FrostArrow);
         arrow.power = mainArrow.power / 4;

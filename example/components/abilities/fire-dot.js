@@ -1,7 +1,7 @@
 class FireDotAbility extends BaseAbility
 {
-    constructor(game, level) {
-        super(game, level);
+    constructor(scene, level) {
+        super(scene, level);
     }
 
     onEnemyHit(arrow, enemy, renderDamageLabel) {

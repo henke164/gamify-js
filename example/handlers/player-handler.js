@@ -1,6 +1,5 @@
 class PlayerHandler {
-    constructor(game) {
-        this.game = game;
+    constructor() {
     }
 
     initializePlayer() {

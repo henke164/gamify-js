@@ -1,11 +1,11 @@
 class SpeedIncreaseAbility extends BaseAbility
 {
-    constructor(game, level) {
-        super(game, level);
+    constructor(scene, level) {
+        super(scene, level);
     }
 
     onShoot() {
-        var bowController = this.game.bowController;
+        var bowController = this.scene.bowController;
         bowController.arrow.speed = (10 * (1 + (0.1 * this.level)) + (bowController.pullDistance / 10));
     }
 }

@@ -3,7 +3,7 @@ class AbilityTreeScene {
         this.position = new Vector2(0, 50);
         this.background = new Texture2D('assets/background.png', Game.screenSize.width, Game.screenSize.height);
         this.panel = new Texture2D('assets/scroll.png', Game.screenSize.width);
-        this.abilityHandler = new AbilityHandler(game);
+        this.abilityHandler = new AbilityHandler();
         this.selectedAbility = null;
 
         this.backToMenuButton = new Button();

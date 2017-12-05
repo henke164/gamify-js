@@ -1,6 +1,5 @@
 class AbilityHandler {
-    constructor(game) {
-        this.game = game;
+    constructor() {
     }
 
     static getAbilityTypes() {

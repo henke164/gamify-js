@@ -1,11 +1,11 @@
 class DefaultAbility extends BaseAbility
 {
-    constructor(game) {
-        super(game, 99);
+    constructor(scene) {
+        super(scene, 99);
     }
 
     onShoot() {
-        var bowController = this.game.bowController;
+        var bowController = this.scene.bowController;
 
         if (bowController.arrow.speed == 0) {
             bowController.arrow.speed = 10 + (bowController.pullDistance / 10);

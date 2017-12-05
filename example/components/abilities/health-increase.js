@@ -1,8 +1,8 @@
 class HealthIncreaseAbility extends BaseAbility
 {
-    constructor(game, level) {
-        super(game, level);
-        this.game.health *= 1 + (0.1 * this.level);
+    constructor(scene, level) {
+        super(scene, level);
+        scene.health *= 1 + (0.1 * this.level);
     }
 }
 

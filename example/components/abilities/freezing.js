@@ -1,11 +1,11 @@
 class FreezingArrowAbility extends BaseAbility
 {
-    constructor(game, level) {
-        super(game, level);
+    constructor(scene, level) {
+        super(scene, level);
     }
 
     onShoot() {
-        var bowController = this.game.bowController;
+        var bowController = this.scene.bowController;
         var mainArrow = bowController.arrow;
         mainArrow.freezing = true;
     }
