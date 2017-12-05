@@ -4,18 +4,30 @@ class AbilityPartialScene {
         this.position = parent.position;
         this.background = new Texture2D('assets/transparent.png', Game.screenSize.width, Game.screenSize.height);
         this.smallPanel = new Texture2D('assets/panel.png', Game.screenSize.width - 20);
+
+        this.coinTexture = new Texture2D('assets/close.png', 30, 30);
+        this.costLabel = new Label('', new Vector2(this.position.x + 70, this.position.y + 175), 'white', '28px', 'HVD');
+
         this.initializeBackButton();
         this.initializeUpgradeButton();
     }
 
     setSelectedAbility(ability) {
         this.selectedAbility = ability;
+        this.cost = this.selectedAbility.level + 1;
+        this.costLabel.text = this.cost;
+
         this.upgradeButton.onClick = function() {
-            this.upgradeStatusText = this.parent.abilityHandler.increaseAbilityLevel(ability.id);
-            this.parent.initializeAbilityTree();
-            setTimeout(function() {
-                this.upgradeStatusText = null;
-            }, 5000);
+            var result = this.parent.abilityHandler.increaseAbilityLevel(ability.id);
+            if (result.successful) {
+                this.parent.initializeAbilityTree();
+                this.parent.selectedAbility = null;
+            } else {
+                this.upgradeStatusText = result.message;
+                setTimeout(function() {
+                    this.upgradeStatusText = null;
+                }, 5000);
+            }
         }.bind(this);
     }
 
@@ -49,7 +61,10 @@ class AbilityPartialScene {
 
     renderSelectedAbility(spriteBatch) {
         var iconLocation = new Vector2(this.position.x + 40, this.position.y + 50);
+        var coinLocation = new Vector2(this.position.x + 40, this.position.y + 150);
+
         spriteBatch.drawTexture(this.selectedAbility.icon, iconLocation);
+        spriteBatch.drawTexture(this.coinTexture, coinLocation);
         spriteBatch.drawText(this.selectedAbility.spellName, new Vector2(this.position.x + 185, this.position.y + 85), "24px HVD", 'Black');
         spriteBatch.drawText(this.selectedAbility.description, new Vector2(this.position.x + 185, this.position.y + 115), "16px HVD", 'Black', 190);
 
@@ -59,5 +74,7 @@ class AbilityPartialScene {
 
         this.upgradeButton.render(spriteBatch);
         this.backToTreeButton.render(spriteBatch);
+        this.costLabel.fontColor = Player.abilityPoints >= this.cost ? 'white' : 'red';
+        this.costLabel.render(spriteBatch);
     }
 }

@@ -39,7 +39,6 @@ class EnemyController {
         this.enemies.updateAll((idx, enemy) => {
             if (enemy.shouldDestroy) {
                 this.enemiesDestroyed++;
-                this.scene.game.topMenu.onEnemyDestroyed();
             }
         });
     }

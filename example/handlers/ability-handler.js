@@ -15,7 +15,7 @@ class AbilityHandler {
         ];
     }
 
-    increaseAbilityLevel(abilityId) {
+    increaseAbilityLevel(abilityId, result) {
         var ability = null;
 
         for(var x = 0; x < Player.abilities.length; x++) {
@@ -29,12 +29,14 @@ class AbilityHandler {
                 id: abilityId,
                 level: 0
             };
-            console.log('pushing', ability);
             Player.abilities.push(ability);
         }
 
         if (ability.level >= 10) {
-            return 'Max level reached.';
+            return {
+                successful: false,
+                message: 'Max level reached.'
+            }
         }
 
         var cost = ability.level;
@@ -44,14 +46,20 @@ class AbilityHandler {
         }
 
         if (cost > Player.abilityPoints) {
-            return 'Not enough points.';
+            return {
+                successful: false,
+                message: 'Not enough points.'
+            }
         }
 
         Player.abilityPoints -= cost;
 
         ability.level++;
 
-        return 'Successfully upgraded ability with id "' + abilityId + '" to level ' + ability.level;
+        return {
+            successful: true,
+            message: 'Successfully upgraded ability with id "' + abilityId + '" to level ' + ability.level
+        }
     }
 
     getPlayerAbilityLevelById(abilityId) {

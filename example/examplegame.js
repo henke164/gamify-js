@@ -1,18 +1,20 @@
 class ExampleGame extends Game {
     constructor(canvas) {
         super(canvas);
-        this.openMenu();
         this.topMenu = new TopMenu(this);
         this.playerHandler = new PlayerHandler(this);
         this.playerHandler.initializePlayer();
+        this.openMenu();
     }
 
     openMenu() {
         this.currentScene = new MenuScene(this);
+        this.topMenu.setCurrentScene(this.currentScene);
     }
 
     startGame(level) {
         this.currentScene = new InGameScene(this, level);
+        this.topMenu.setCurrentScene(this.currentScene);
     }
 
     setAbilityTreeScene() {
@@ -21,6 +23,7 @@ class ExampleGame extends Game {
 
     update() {
         this.currentScene.update();
+        this.topMenu.update();
         super.update();
     }
 

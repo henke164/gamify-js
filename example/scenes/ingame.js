@@ -10,7 +10,6 @@ class InGameScene {
         this.bowController = new BowController(this.combatController.onShoot);
         this.background = new Texture2D('assets/background.png', Game.screenSize.width, Game.screenSize.height);
         this.gameState = GAME_STATE_RUNNING;
-        this.game.topMenu.setEnemyCount(this.enemyCount);
         /*
         this.enemyController.enemyCount = 0;
         this.enemyController.enemies = new GameObjectArray();
@@ -20,7 +19,6 @@ class InGameScene {
 
     onPlayerAttacked() {
         this.health--;
-        this.game.topMenu.onEnemyDestroyed();
     }
 
     update() {

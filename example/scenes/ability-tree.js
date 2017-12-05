@@ -60,15 +60,18 @@ class AbilityTreeScene {
         var parent = this;
         for (var x = 0; x < this.abilityTree.length; x++) {
             var ability = this.abilityTree[x];
+            var abilityHandler = this.abilityHandler;
+
             ability.button.onClick = function () {
                 parent.selectedAbility = {
                     id: this.ability.id,
                     icon: this.ability.icon,
                     spellName: this.ability.spellName,
-                    description: this.ability.description
+                    description: this.ability.description,
+                    level: abilityHandler.getPlayerAbilityLevelById(this.ability.id),
                 };
 
-                parent.abilityPartial.setSelectedAbility(this.ability);
+                parent.abilityPartial.setSelectedAbility(parent.selectedAbility);
             }.bind(ability);
         }
     }
