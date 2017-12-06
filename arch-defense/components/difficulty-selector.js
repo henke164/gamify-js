@@ -1,21 +1,17 @@
 class DifficultySelector {
-    constructor(position = Vector2.zero) {
+    constructor() {
         this.panel = new Texture2D('assets/level_panel.png', Game.screenSize.width);
         this.difficulty = Player.selectedDifficulty;
-        this.position = position;
+        this.position = new Vector2(0, 100);
         this.initialize();
     }
 
     initialize() {
         this.difficultySelector = new GameObjectArray();
-        this.difficultySelectorSize = {
-            width: 80,
-            height: 75
-        };
 
         var row = 0;
         var column = 0;
-        var level = Player.maxReachedDifficulty - 6;
+        var level = Player.completedLevels[0] - 2;
 
         if (level < 1) {
             level = 1;
@@ -26,13 +22,13 @@ class DifficultySelector {
         }
 
         console.log(level);
-        for (var x = 0; x < 10; x++) {
-            var enabled = level <= Player.maxReachedDifficulty + 2;
+        for (var x = 0; x < 6; x++) {
+            var enabled = level <= Player.completedLevels[0] + 2;
             var parent = this;
             var levelButton = this.difficultySelector.addGameObject(Button);
             levelButton.position = new Vector2(
-                (this.position.x + 35) + (column * this.difficultySelectorSize.width),
-                (this.position.y + 50) + (row * this.difficultySelectorSize.height));
+                (this.position.x + 55) + (column * difficultySelectorSize.width),
+                (this.position.y + 50) + (row * difficultySelectorSize.height));
 
             if (enabled) {
                 levelButton.text = level;
@@ -42,12 +38,12 @@ class DifficultySelector {
                 }.bind(levelButton);
                 this.initializeRibbon(levelButton, level);
             } else {
-                levelButton.texture = new Texture2D('assets/level_locked.png', this.difficultySelectorSize.width, this.difficultySelectorSize.height);
+                levelButton.texture = Textures['difficultySelector.disabled'];
             }
 
             levelButton.value = level++;
 
-            if (x == 4) {
+            if (column == 2) {
                 row++;
                 column = 0;
             } else {
@@ -57,16 +53,14 @@ class DifficultySelector {
     }
 
     initializeRibbon(levelButton, level) {
-        var ribbon = this.difficultySelector.addGameObject(Sprite);
+        if (Player.completedLevels.indexOf(level) > -1) {
+            var ribbon = this.difficultySelector.addGameObject(Sprite);
 
-        if (level > Player.maxReachedDifficulty) {
-            ribbon.texture = new Texture2D('assets/ribbon_0.png', this.difficultySelectorSize.width);
-        } else {
-            ribbon.texture = new Texture2D('assets/ribbon_1.png', this.difficultySelectorSize.width);
+            ribbon.texture = new Texture2D('assets/completed_ribbon.png', difficultySelectorSize.width, 45);
+    
+            ribbon.position = new Vector2(levelButton.position.x + difficultySelectorSize.width / 2,
+                levelButton.position.y + difficultySelectorSize.height - 30);
         }
-
-        ribbon.position = new Vector2(levelButton.position.x + this.difficultySelectorSize.width / 2,
-            levelButton.position.y + this.difficultySelectorSize.height - 14);
     }
 
     update() {
@@ -84,7 +78,7 @@ class DifficultySelector {
     }
 
     render(spriteBatch) {
-        spriteBatch.drawTexture(this.panel, Vector2.zero);
+        spriteBatch.drawTexture(this.panel, this.position);
         this.difficultySelector.renderAll(spriteBatch);
     }
 }

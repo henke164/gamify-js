@@ -31,12 +31,14 @@ class PlayerHandler {
                 Player.initializeBaseStats();
                 Player.requiredExperience = NumberProvider.getBaseNumberForLevel(Player.level) * NumberProvider.getBaseNumberForLevel(Player.level) * 2;
                 Player.abilityPoints += ap;
-                if (difficulty > Player.maxReachedDifficulty) {
-                    Player.maxReachedDifficulty = difficulty;
-                }
             }
         }
         Player.selectedDifficulty++;
+        
+        if (Player.completedLevels.indexOf(difficulty) == -1) {
+            Player.completedLevels.push(difficulty);
+        }
+        Player.completedLevels.reverse();
         console.log(Player);
 
         summaryCallback(summary);

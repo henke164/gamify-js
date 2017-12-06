@@ -3,10 +3,10 @@ var Player = (function(){
     p.level = 1;
     p.experience = 0;
     p.requiredExperience = 6;
-    p.abilityPoints = 1;
+    p.abilityPoints = 10;
     p.abilities = [];
     p.selectedDifficulty = 1;
-    p.maxReachedDifficulty = 2;
+    p.completedLevels = [5, 3, 2, 1];
 
     p.initializeBaseStats = () => {
         baseStats = {

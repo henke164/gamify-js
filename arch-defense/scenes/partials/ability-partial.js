@@ -5,8 +5,8 @@ class AbilityPartialScene {
         this.background = new Texture2D('assets/transparent.png', Game.screenSize.width, Game.screenSize.height);
         this.smallPanel = new Texture2D('assets/panel.png', Game.screenSize.width - 20);
 
-        this.coinTexture = new Texture2D('assets/close.png', 30, 30);
-        this.costLabel = new Label('', new Vector2(this.position.x + 70, this.position.y + 175), 'white', '28px', 'HVD');
+        this.coinTexture = new Texture2D('assets/coins.png', 30, 30);
+        this.costLabel = new Label('', new Vector2(this.position.x + 75, this.position.y + 175), 'white', '28px', 'HVD');
 
         this.initializeBackButton();
         this.initializeUpgradeButton();
@@ -15,7 +15,7 @@ class AbilityPartialScene {
     setSelectedAbility(ability) {
         this.selectedAbility = ability;
         this.cost = this.selectedAbility.level + 1;
-        this.costLabel.text = this.cost;
+        this.costLabel.text = 'x ' + this.cost;
 
         this.upgradeButton.onClick = function() {
             var result = this.parent.abilityHandler.increaseAbilityLevel(ability.id);
