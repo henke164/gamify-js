@@ -21,7 +21,6 @@ class DifficultySelector {
             Player.selectedDifficulty = level;
         }
 
-        console.log(level);
         for (var x = 0; x < 6; x++) {
             var enabled = level <= Player.completedLevels[0] + 2;
             var parent = this;
@@ -35,6 +34,7 @@ class DifficultySelector {
                 levelButton.texture = Textures['difficultySelector.enabled'];
                 levelButton.onClick = function() {
                     Player.selectedDifficulty = this.value;
+                    parent.selectedDifficulty = this.value;
                 }.bind(levelButton);
                 this.initializeRibbon(levelButton, level);
             } else {
@@ -64,17 +64,7 @@ class DifficultySelector {
     }
 
     update() {
-        this.difficultySelector.updateAll((x, btn) => {
-            if (Player.selectedDifficulty == btn.value) {
-                if (btn.texture === Textures['difficultySelector.enabled']) {
-                    btn.texture = Textures['difficultySelector.selected'];
-                }
-            } else {
-                if (btn.texture === Textures['difficultySelector.selected']) {
-                    btn.texture = Textures['difficultySelector.enabled'];
-                }
-            }
-        });
+        this.difficultySelector.updateAll();
     }
 
     render(spriteBatch) {

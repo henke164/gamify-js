@@ -38,7 +38,7 @@ class PlayerHandler {
         if (Player.completedLevels.indexOf(difficulty) == -1) {
             Player.completedLevels.push(difficulty);
         }
-        Player.completedLevels.reverse();
+        Player.completedLevels.sort(sortNumberDesc);
         console.log(Player);
 
         summaryCallback(summary);

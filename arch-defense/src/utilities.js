@@ -47,3 +47,11 @@ var TEXTURECORNER = {
     LEFT: 180,
     BOTTOM: 270
 }
+
+function sortNumber(a,b) {
+    return a - b;
+}
+
+function sortNumberDesc(a,b) {
+    return b - a;
+}

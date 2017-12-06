@@ -40,5 +40,3 @@ var difficultySelectorSize = {
 Textures['difficultySelector.enabled'] = new Texture2D('assets/level_enabled.png', difficultySelectorSize.width, difficultySelectorSize.height);
 
 Textures['difficultySelector.disabled'] = new Texture2D('assets/level_locked.png', difficultySelectorSize.width, difficultySelectorSize.height);
-
-Textures['difficultySelector.selected'] = new Texture2D('assets/level_enabled_selected.png', difficultySelectorSize.width, difficultySelectorSize.height);
