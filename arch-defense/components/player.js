@@ -10,7 +10,7 @@ var Player = (function(){
 
     p.initializeBaseStats = () => {
         baseStats = {
-            health: NumberProvider.getBaseNumberForLevel(p.level) * 0.1,
+            health: NumberProvider.getBaseNumberForLevel(p.level) * 1,
             basePower: NumberProvider.getBaseNumberForLevel(p.level),
         };
     }
