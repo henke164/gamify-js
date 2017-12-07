@@ -10,6 +10,7 @@ class InGameScene {
         this.bowController = new BowController(this.combatController.onShoot);
         this.background = new Texture2D('assets/background.png', Game.screenSize.width, Game.screenSize.height);
         this.gameState = GAME_STATE_RUNNING;
+        this.setSummary = this.setSummary.bind(this);
         /*
         this.enemyController.enemyCount = 0;
         this.enemyController.enemies = new GameObjectArray();
@@ -26,33 +27,28 @@ class InGameScene {
             this.setGameWon();
         } else if (this.health <= 0) {
             this.setGameLost();
-        } else {
-            this.bowController.update();
-            this.enemyController.update();
-            this.combatController.update();
+        }
+
+        this.bowController.update();
+        this.enemyController.update();
+        this.combatController.update();
+
+        if (this.gameState !== GAME_STATE_RUNNING) {
+            this.resultPartial.update();
         }
     }
 
     setGameWon() {
-        if (this.gameState == GAME_STATE_RUNNING) {
+        if (this.gameState === GAME_STATE_RUNNING) {
             this.gameState = GAME_STATE_WON;
-            this.resultLabel = new Label('Level Completed! Score:' + this.enemyController.enemiesDestroyed, new Vector2(100, 200));
-            this.playerHandler.completeLevel(this.difficulty, this.enemyController.enemiesDestroyed, this.setSummary);
-
-            setTimeout(function() {
-                this.game.openMenu();
-            }.bind(this), 2000);
+            this.playerHandler.onLevelFinished(this.gameState, this.difficulty, this.enemyController.enemiesDestroyed, this.setSummary);
         }
     }
 
     setGameLost() {
-        if (this.gameState == GAME_STATE_RUNNING) {
+        if (this.gameState === GAME_STATE_RUNNING) {
             this.gameState = GAME_STATE_LOST;
-            this.resultLabel = new Label('You Lost!', new Vector2(100, 200));
-
-            setTimeout(function() {
-                this.game.openMenu();
-            }.bind(this), 2000);
+            this.playerHandler.onLevelFinished(this.gameState, this.difficulty, this.enemyController.enemiesDestroyed, this.setSummary);
         }
     }
 
@@ -60,16 +56,16 @@ class InGameScene {
         spriteBatch.drawTexture(this.background, Vector2.zero);
         this.combatController.render(spriteBatch);
 
-        if (this.gameState == GAME_STATE_RUNNING) {
+        if (this.gameState === GAME_STATE_RUNNING) {
             this.bowController.renderBowAndArrows(spriteBatch);
             this.enemyController.renderEnemies(spriteBatch);
         } else {
-            this.resultLabel.render(spriteBatch);
+            this.resultPartial.render(spriteBatch);
         }
     }
 
     setSummary(summary) {
-        console.log(summary);
+        this.resultPartial = new ResultPartial(this, summary);
     }
 }
 

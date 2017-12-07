@@ -17,7 +17,7 @@ class ExampleGame extends Game {
         this.topMenu.setCurrentScene(this.currentScene);
     }
 
-    setAbilityTreeScene() {
+    openAbilityTreeScene() {
         this.currentScene = new AbilityTreeScene(this);
     }
 

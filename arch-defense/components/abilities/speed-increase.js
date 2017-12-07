@@ -6,7 +6,8 @@ class SpeedIncreaseAbility extends BaseAbility
 
     onShoot() {
         var bowController = this.scene.bowController;
-        bowController.arrow.speed = (10 * (1 + (0.1 * this.level)) + (bowController.pullDistance / 10));
+        var multiplier = this.level * 0.1;
+        bowController.arrow.speed += (bowController.arrow.speed * multiplier);
     }
 }
 

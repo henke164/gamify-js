@@ -3,14 +3,14 @@ var Player = (function(){
     p.level = 1;
     p.experience = 0;
     p.requiredExperience = 6;
-    p.abilityPoints = 10;
+    p.abilityPoints = 0;
     p.abilities = [];
     p.selectedDifficulty = 1;
-    p.completedLevels = [5, 3, 2, 1];
+    p.completedLevels = [];
 
     p.initializeBaseStats = () => {
         baseStats = {
-            health: NumberProvider.getBaseNumberForLevel(p.level) * 1,
+            health: NumberProvider.getBaseNumberForLevel(p.level) * 0.5,
             basePower: NumberProvider.getBaseNumberForLevel(p.level),
         };
     }

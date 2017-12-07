@@ -1,6 +1,6 @@
 class DifficultySelector {
     constructor() {
-        this.panel = new Texture2D('assets/level_panel.png', Game.screenSize.width);
+        this.panel = new Texture2D('assets/panel_2.png', Game.screenSize.width);
         this.difficulty = Player.selectedDifficulty;
         this.position = new Vector2(0, 100);
         this.initialize();
@@ -11,7 +11,8 @@ class DifficultySelector {
 
         var row = 0;
         var column = 0;
-        var level = Player.completedLevels[0] - 2;
+        var playerProgress = Player.completedLevels.length > 0 ? Player.completedLevels[0] : 0;
+        var level = playerProgress - 2;
 
         if (level < 1) {
             level = 1;
@@ -22,7 +23,7 @@ class DifficultySelector {
         }
 
         for (var x = 0; x < 6; x++) {
-            var enabled = level <= Player.completedLevels[0] + 2;
+            var enabled = level <= playerProgress + 2;
             var parent = this;
             var levelButton = this.difficultySelector.addGameObject(Button);
             levelButton.position = new Vector2(
@@ -57,7 +58,7 @@ class DifficultySelector {
             var ribbon = this.difficultySelector.addGameObject(Sprite);
 
             ribbon.texture = new Texture2D('assets/completed_ribbon.png', difficultySelectorSize.width, 45);
-    
+
             ribbon.position = new Vector2(levelButton.position.x + difficultySelectorSize.width / 2,
                 levelButton.position.y + difficultySelectorSize.height - 30);
         }

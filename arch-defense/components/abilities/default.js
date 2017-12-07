@@ -11,8 +11,6 @@ class DefaultAbility extends BaseAbility
             bowController.arrow.speed = 10 + (bowController.pullDistance / 10);
         }
 
-        bowController.arrow.speed = 30;
-
         bowController.arrow.velocity = Vector2.direction(
             bowController.arrow.position, bowController.startPullLocation);
         bowController.pullDistance = 0;
